@@ -9,12 +9,12 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import org.example.DinoGame;
+import org.example.DinoCommute;
 
 public abstract class Button extends TextEntity implements MouseButtonPressedListener, MouseEnterListener, MouseExitListener {
-    protected DinoGame game;
+    protected DinoCommute game;
 
-    public Button(Coordinate2D initialLocation, DinoGame game, int fontSize) {
+    public Button(Coordinate2D initialLocation, DinoCommute game, int fontSize) {
         super(initialLocation,"Play game");
         setFill(Color.BLACK);
         setFont(Font.font("Roboto", FontWeight.BOLD, fontSize));

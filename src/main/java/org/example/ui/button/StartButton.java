@@ -2,10 +2,10 @@ package org.example.ui.button;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import javafx.scene.input.MouseButton;
-import org.example.DinoGame;
+import org.example.DinoCommute;
 
 public class StartButton extends Button{
-    public StartButton(Coordinate2D initialLocation, DinoGame game, int fontSize) {
+    public StartButton(Coordinate2D initialLocation, DinoCommute game, int fontSize) {
         super(initialLocation, game, fontSize);
     }
 

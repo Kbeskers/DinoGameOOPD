@@ -1,0 +1,4 @@
+package org.example.scenes;
+
+public class TitleScene {
+}
