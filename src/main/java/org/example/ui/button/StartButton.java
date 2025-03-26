@@ -5,12 +5,13 @@ import javafx.scene.input.MouseButton;
 import org.example.DinoCommute;
 
 public class StartButton extends Button{
+
     public StartButton(Coordinate2D initialLocation, DinoCommute game, int fontSize) {
         super(initialLocation, game, fontSize);
     }
 
     @Override
     public void onMouseButtonPressed(MouseButton mouseButton, Coordinate2D coordinate2D) {
-
+        game.setActiveScene(1);
     }
 }
