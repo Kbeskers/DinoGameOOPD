@@ -14,8 +14,8 @@ import org.example.DinoCommute;
 public abstract class Button extends TextEntity implements MouseButtonPressedListener, MouseEnterListener, MouseExitListener {
     protected DinoCommute game;
 
-    public Button(Coordinate2D initialLocation, DinoCommute game, int fontSize) {
-        super(initialLocation,"Play game");
+    public Button(Coordinate2D initialLocation, DinoCommute game, int fontSize, String text) {
+        super(initialLocation, text);
         setFill(Color.BLACK);
         setFont(Font.font("Roboto", FontWeight.BOLD, fontSize));
 

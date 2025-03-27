@@ -4,6 +4,7 @@ import com.github.hanyaeger.api.AnchorPoint;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.scenes.StaticScene;
 import org.example.DinoCommute;
+import org.example.ui.button.QuitButton;
 import org.example.ui.button.StartButton;
 import org.example.ui.text.Text;
 
@@ -21,12 +22,16 @@ public class TitleScene extends StaticScene {
 
     @Override
     public void setupEntities() {
-        var titleText = new Text(new Coordinate2D(getWidth() / 2, getHeight() / 2), 80, "Dino Commute!");
+        var titleText = new Text(new Coordinate2D(getWidth() / 2, (getHeight() / 2) - 70), 80, "Dino Commute!");
         titleText.setAnchorPoint(AnchorPoint.CENTER_CENTER);
         addEntity(titleText);
 
-        var startButton = new StartButton(new Coordinate2D(getWidth() / 2, (getHeight() / 2) + 50), game, 30);
+        var startButton = new StartButton(new Coordinate2D(getWidth() / 2, (getHeight() / 2) + 0), game, 30);
         startButton.setAnchorPoint(AnchorPoint.CENTER_CENTER);
         addEntity(startButton);
+
+        var quitButton = new QuitButton(new Coordinate2D(getWidth() / 2, (getHeight() / 2) + 70), game, 30);
+        quitButton.setAnchorPoint(AnchorPoint.CENTER_CENTER);
+        addEntity(quitButton);
     }
 }

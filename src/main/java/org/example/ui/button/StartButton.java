@@ -7,7 +7,7 @@ import org.example.DinoCommute;
 public class StartButton extends Button{
 
     public StartButton(Coordinate2D initialLocation, DinoCommute game, int fontSize) {
-        super(initialLocation, game, fontSize);
+        super(initialLocation, game, fontSize, "Start Game");
     }
 
     @Override

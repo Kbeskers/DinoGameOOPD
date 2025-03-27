@@ -15,15 +15,18 @@ import java.util.List;
 import java.util.Set;
 
 public class Player extends DynamicSpriteEntity implements KeyListener, Newtonian, Collider, Collided {
+    private DinoCommute game;
+    private ScoreText scoreText;
+    private int score = 0;
     //private HealthText healthText;
     private int health = 100;
     private int maxHealth = 100;
-    private ScoreText scoreText;
-    private int score = 0;
-    private DinoCommute game;
 
-    public Player(String resource, Coordinate2D initialLocation, DinoCommute game, Text scoreText) {
+    public Player(String resource, Coordinate2D initialLocation, DinoCommute game, ScoreText scoreText) {
         super(resource, initialLocation);
+        this.game = game;
+        this.scoreText = scoreText;
+        //this.HealthText = HealthText;
     }
 
     @Override

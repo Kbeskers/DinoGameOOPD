@@ -6,7 +6,7 @@ import org.example.DinoCommute;
 
 public class QuitButton extends Button{
     public QuitButton(Coordinate2D initialLocation, DinoCommute game, int fontSize) {
-        super(initialLocation, game, fontSize);
+        super(initialLocation, game, fontSize, "Quit Game");
     }
 
     @Override
