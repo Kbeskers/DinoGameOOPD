@@ -6,10 +6,7 @@ import org.example.scenes.EndScene;
 import org.example.scenes.GameScene;
 import org.example.scenes.TitleScene;
 
-/**
- * Hello world!
- *
- */
+
 public class DinoCommute extends YaegerGame
 {
     public static void main( String[] args )
@@ -20,7 +17,7 @@ public class DinoCommute extends YaegerGame
     @Override
     public void setupGame() {
         setGameTitle("Dino Commute!");
-        setSize(new Size(800, 600));
+        setSize(new Size(1200, 800));
     }
 
     @Override

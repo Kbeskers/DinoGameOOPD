@@ -4,6 +4,6 @@ module DinoGameOOPD {
     exports org.example;
 
     //opens audio;
-    //opens backgrounds;
+    opens backgrounds;
     opens sprites;
 }

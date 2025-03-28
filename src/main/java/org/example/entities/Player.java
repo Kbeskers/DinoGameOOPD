@@ -10,6 +10,7 @@ import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
 import org.example.DinoCommute;
 import org.example.ui.text.HealthText;
+import org.example.ui.text.ScoreText;
 
 import java.util.List;
 import java.util.Set;
