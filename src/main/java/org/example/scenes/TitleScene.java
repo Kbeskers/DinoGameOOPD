@@ -6,6 +6,8 @@ import com.github.hanyaeger.api.scenes.StaticScene;
 import org.example.DinoCommute;
 import org.example.ui.button.QuitButton;
 import org.example.ui.button.StartButton;
+import org.example.ui.text.HealthText;
+import org.example.ui.text.HighScoreText;
 import org.example.ui.text.Text;
 
 public class TitleScene extends StaticScene {
@@ -22,6 +24,16 @@ public class TitleScene extends StaticScene {
 
     @Override
     public void setupEntities() {
+        int offset = (int) (getWidth() / 50);
+        int textSize = 30;
+        var healthText = new HealthText(new Coordinate2D(offset, offset), textSize);
+        healthText.setAnchorPoint(AnchorPoint.TOP_LEFT);
+        addEntity(healthText);
+
+        var highScoreText = new HighScoreText(new Coordinate2D(getWidth() - offset, offset), textSize);
+        highScoreText.setAnchorPoint(AnchorPoint.TOP_RIGHT);
+        addEntity(highScoreText);
+
         var titleText = new Text(new Coordinate2D(getWidth() / 2, (getHeight() / 2) - 70), 80, "Dino Commute!");
         titleText.setAnchorPoint(AnchorPoint.CENTER_CENTER);
         addEntity(titleText);

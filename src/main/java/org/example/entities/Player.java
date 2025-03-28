@@ -5,28 +5,32 @@ import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.Newtonian;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
+import com.github.hanyaeger.api.scenes.DynamicScene;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
 import org.example.DinoCommute;
-import org.example.ui.text.ScoreText;
-import org.example.ui.text.Text;
+import org.example.ui.text.HealthText;
 
 import java.util.List;
 import java.util.Set;
 
 public class Player extends DynamicSpriteEntity implements KeyListener, Newtonian, Collider, Collided {
     private DinoCommute game;
+    private DynamicScene gameScene;
+
     private ScoreText scoreText;
     private int score = 0;
-    //private HealthText healthText;
+    private HealthText healthText;
     private int health = 100;
     private int maxHealth = 100;
 
-    public Player(String resource, Coordinate2D initialLocation, DinoCommute game, ScoreText scoreText) {
-        super(resource, initialLocation);
+
+    public Player(Coordinate2D initialLocation, DinoCommute game, DynamicScene gameScene, ScoreText scoreText, HealthText healthText) {
+        super("sprites/zwaard.png", initialLocation);
         this.game = game;
+        this.gameScene = gameScene;
         this.scoreText = scoreText;
-        //this.HealthText = HealthText;
+        this.healthText = healthText;
     }
 
     @Override
@@ -67,7 +71,7 @@ public class Player extends DynamicSpriteEntity implements KeyListener, Newtonia
         } else {
             health = newHealth;
         }
-        scoreText.setScoreText(health);
+        healthText.setHealthText(health);
         if(isDead()){
 
         }
