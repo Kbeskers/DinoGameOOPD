@@ -74,7 +74,7 @@ public class Player extends DynamicSpriteEntity implements KeyListener, Newtonia
         }
         healthText.setHealthText(health);
         if(isDead()){
-
+            game.setActiveScene(2);
         }
     }
     private boolean isDead(){
@@ -103,4 +103,12 @@ public class Player extends DynamicSpriteEntity implements KeyListener, Newtonia
             return false;
         }
     }
+
+//    public final void update(long timestamp){
+//        System.out.println(getLocationInScene().getY());
+//        if (getLocationInScene().getY() > getHeight()){
+//            setAnchorLocationY(getSceneHeight() - getHeight() - 1);
+//            setSpeed(0);
+//        }
+//    }
 }

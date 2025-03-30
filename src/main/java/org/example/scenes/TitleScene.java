@@ -11,10 +11,10 @@ import org.example.ui.text.HighScoreText;
 import org.example.ui.text.Text;
 
 public class TitleScene extends StaticScene {
-    private DinoCommute game;
+    private final DinoCommute GAME;
 
     public TitleScene(DinoCommute dinoCommute) {
-        game = dinoCommute;
+        GAME = dinoCommute;
     }
 
     @Override
@@ -26,9 +26,6 @@ public class TitleScene extends StaticScene {
     public void setupEntities() {
         int offset = (int) (getWidth() / 50);
         int textSize = 30;
-        var healthText = new HealthText(new Coordinate2D(offset, offset), textSize);
-        healthText.setAnchorPoint(AnchorPoint.TOP_LEFT);
-        addEntity(healthText);
 
         var highScoreText = new HighScoreText(new Coordinate2D(getWidth() - offset, offset), textSize);
         highScoreText.setAnchorPoint(AnchorPoint.TOP_RIGHT);
@@ -38,11 +35,11 @@ public class TitleScene extends StaticScene {
         titleText.setAnchorPoint(AnchorPoint.CENTER_CENTER);
         addEntity(titleText);
 
-        var startButton = new StartButton(new Coordinate2D(getWidth() / 2, (getHeight() / 2) + 0), game, 30);
+        var startButton = new StartButton(new Coordinate2D(getWidth() / 2, (getHeight() / 2) + 0), GAME, 30);
         startButton.setAnchorPoint(AnchorPoint.CENTER_CENTER);
         addEntity(startButton);
 
-        var quitButton = new QuitButton(new Coordinate2D(getWidth() / 2, (getHeight() / 2) + 70), game, 30);
+        var quitButton = new QuitButton(new Coordinate2D(getWidth() / 2, (getHeight() / 2) + 70), GAME, 30);
         quitButton.setAnchorPoint(AnchorPoint.CENTER_CENTER);
         addEntity(quitButton);
     }

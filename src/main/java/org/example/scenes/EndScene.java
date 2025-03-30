@@ -12,10 +12,10 @@ import org.example.ui.text.ScoreText;
 import org.example.ui.text.Text;
 
 public class EndScene extends StaticScene {
-    private DinoCommute game;
+    private final DinoCommute GAME;
 
     public EndScene(DinoCommute dinoCommute) {
-        game = dinoCommute;
+        GAME = dinoCommute;
     }
 
     @Override
@@ -43,11 +43,11 @@ public class EndScene extends StaticScene {
         gameOverText.setAnchorPoint(AnchorPoint.CENTER_CENTER);
         addEntity(gameOverText);
 
-        var startButton = new StartButton(new Coordinate2D(getWidth() / 2, (getHeight() / 2) + 0), game, 30);
+        var startButton = new StartButton(new Coordinate2D(getWidth() / 2, (getHeight() / 2) + 0), GAME, 30);
         startButton.setAnchorPoint(AnchorPoint.CENTER_CENTER);
         addEntity(startButton);
 
-        var quitButton = new QuitButton(new Coordinate2D(getWidth() / 2, (getHeight() / 2) + 70), game, 30);
+        var quitButton = new QuitButton(new Coordinate2D(getWidth() / 2, (getHeight() / 2) + 70), GAME, 30);
         quitButton.setAnchorPoint(AnchorPoint.CENTER_CENTER);
         addEntity(quitButton);
     }
