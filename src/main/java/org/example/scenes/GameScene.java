@@ -2,6 +2,9 @@ package org.example.scenes;
 
 import com.github.hanyaeger.api.AnchorPoint;
 import com.github.hanyaeger.api.Coordinate2D;
+import com.github.hanyaeger.api.EntitySpawnerContainer;
+import com.github.hanyaeger.api.entities.EntitySpawner;
+import org.example.entities.Entityspawner;
 import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.YaegerEntity;
 import com.github.hanyaeger.api.scenes.DynamicScene;
@@ -11,7 +14,7 @@ import org.example.ui.text.HealthText;
 import org.example.ui.text.HighScoreText;
 import org.example.ui.text.ScoreText;
 
-public class GameScene extends DynamicScene {
+public class GameScene extends DynamicScene implements EntitySpawnerContainer {
     private DinoCommute game;
     public GameScene(DinoCommute dinoCommute) {
         game = dinoCommute;
@@ -51,5 +54,10 @@ public class GameScene extends DynamicScene {
         addEntity(new ParallaxBackground("backgrounds/gebouwen_achtergrond.png", new Coordinate2D(0, 0), new Size(getWidth() * 1.2, getHeight()), this, 102, 0.5));
         addEntity(new ParallaxBackground("backgrounds/gebouwen_voorgrond.png", new Coordinate2D(0, 0), new Size(getWidth() * 1.2, getHeight()), this, 101, 0.7));
         addEntity(new ParallaxBackground("backgrounds/straat_voorgrond.png", new Coordinate2D(0, 0), new Size(getWidth() * 1.2, getHeight()), this, 100, 1));
+    }
+
+    @Override
+    public void setupEntitySpawners() {
+        addEntitySpawner(new Entityspawner());
     }
 }

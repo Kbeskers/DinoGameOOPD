@@ -33,7 +33,8 @@ public class ParallaxBackground extends DynamicSpriteEntity implements SceneBord
 
     @Override
     public void notifyBoundaryTouching(final SceneBorder border) {
-        if (border.equals(SceneBorder.LEFT) && Math.round(this.getAnchorLocation().getX() / speed) == -(int) ((this.size.width() / speed) / ((size.width()/scene.getWidth())/(((size.width()/scene.getWidth()) - 1))))) { //formule om de juiste interval tussen het laden van parrallax sprites te berekenen
+        if (border.equals(SceneBorder.LEFT) && Math.round(this.getAnchorLocation().getX() / speed) == -(int) ((this.size.width() / speed) / ( (size.width()/scene.getWidth())
+                / ( ((size.width()/scene.getWidth())  - 1) )))) { //formule om de juiste interval tussen het laden van parrallax sprites te berekenen
             var newLocation = new Coordinate2D(scene.getWidth(), initialLocation.getY());
             scene.addEntity(new ParallaxBackground(resource, newLocation, size, scene, viewIndex, speed));
             System.out.println("ParallaxBackground added" + newLocation + getWidth());
