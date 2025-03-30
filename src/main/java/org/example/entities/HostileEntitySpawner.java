@@ -13,14 +13,16 @@ import java.util.Random;
 public class HostileEntitySpawner extends EntitySpawner {
     private final DynamicScene GAME_SCENE;
 
+    private int spawnIntervalMs;
     private int speed;
     private double speedMultiplier;
 
-    public HostileEntitySpawner(long intervalInMs, DynamicScene gameScene) {
-        super(intervalInMs);
+    public HostileEntitySpawner( DynamicScene gameScene) {
+        super(3000);//starting interval
 
         this.GAME_SCENE = gameScene;
-        this.speed = 5;
+        spawnIntervalMs = 3000;
+        speed = 5;
         speedMultiplier = 1;
     }
 

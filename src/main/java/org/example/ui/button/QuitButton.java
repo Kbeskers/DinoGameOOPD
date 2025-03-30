@@ -11,6 +11,6 @@ public class QuitButton extends Button{
 
     @Override
     public void onMouseButtonPressed(MouseButton mouseButton, Coordinate2D coordinate2D) {
-        game.quit();
+        GAME.quit();
     }
 }

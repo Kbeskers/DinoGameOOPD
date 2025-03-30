@@ -12,14 +12,14 @@ import javafx.scene.text.FontWeight;
 import org.example.DinoCommute;
 
 public abstract class Button extends TextEntity implements MouseButtonPressedListener, MouseEnterListener, MouseExitListener {
-    protected DinoCommute game;
+    protected final DinoCommute GAME;
 
     public Button(Coordinate2D initialLocation, DinoCommute game, int fontSize, String text) {
         super(initialLocation, text);
         setFill(Color.BLACK);
         setFont(Font.font("Roboto", FontWeight.BOLD, fontSize));
 
-        this.game = game;
+        this.GAME = game;
     }
 
     @Override
