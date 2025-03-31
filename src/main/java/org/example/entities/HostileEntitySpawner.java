@@ -20,7 +20,6 @@ public class HostileEntitySpawner extends EntitySpawner {
         super(3000);//starting interval
 
         this.GAME_SCENE = gameScene;
-        spawnIntervalMs = 3000;
         BASE_SPEED = 5;
         speedMultiplier = 1;
     }
@@ -55,5 +54,12 @@ public class HostileEntitySpawner extends EntitySpawner {
     private int random(int min, int max) {
         Random rand = new Random();
         return min + (rand.nextInt ((max - min) + 1));
+    }
+
+    public double getSpeedMultiplier() {
+        return speedMultiplier;
+    }
+    public void setSpeedMultiplier(double speedMultiplier) {
+        this.speedMultiplier = speedMultiplier;
     }
 }

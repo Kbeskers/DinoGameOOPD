@@ -35,6 +35,8 @@ public class Player extends DynamicSpriteEntity implements KeyListener, Newtonia
 
     private long invicibleDuration;
 
+    private double speedMultiplier;
+
 
     public Player(Coordinate2D initialLocation, DinoCommute game, DynamicScene gameScene, ScoreText scoreText, HealthText healthText) {
         super("sprites/dino.png", initialLocation);
@@ -127,5 +129,12 @@ public class Player extends DynamicSpriteEntity implements KeyListener, Newtonia
             setSpeed(0);
         }
         System.out.println(timestamp);
+    }
+
+    public double getSpeedMultiplier() {
+        return speedMultiplier;
+    }
+    public void setSpeedMultiplier(double speedMultiplier) {
+        this.speedMultiplier = speedMultiplier;
     }
 }
