@@ -13,8 +13,7 @@ import java.util.Random;
 public class HostileEntitySpawner extends EntitySpawner {
     private final DynamicScene GAME_SCENE;
 
-    private int spawnIntervalMs;
-    private int speed;
+    private final double BASE_SPEED;
     private double speedMultiplier;
 
     public HostileEntitySpawner( DynamicScene gameScene) {
@@ -22,26 +21,27 @@ public class HostileEntitySpawner extends EntitySpawner {
 
         this.GAME_SCENE = gameScene;
         spawnIntervalMs = 3000;
-        speed = 5;
+        BASE_SPEED = 5;
         speedMultiplier = 1;
     }
 
     @Override
     protected void spawnEntities() {
         int rand = random(0, 3);
-        System.out.println(rand);
+        double currentSpeed = BASE_SPEED * speedMultiplier;
+        int groundOffset = 100;
         switch(rand) {
             case 0:
-                spawn(new Pterodactyl(new Coordinate2D(GAME_SCENE.getWidth() - 1, random(200, (int) GAME_SCENE.getHeight())) , speed));
+                spawn(new Pterodactyl(new Coordinate2D(GAME_SCENE.getWidth() - 1, random(200, (int) GAME_SCENE.getHeight())) , currentSpeed));
                 break;
             case 1:
-                spawn(new Bike(new Coordinate2D(GAME_SCENE.getWidth() - 1, GAME_SCENE.getHeight()) , speed));
+                spawn(new Bike(new Coordinate2D(GAME_SCENE.getWidth() - 1, GAME_SCENE.getHeight() - groundOffset) , currentSpeed));
                 break;
             case 2:
-                spawn(new Trashcan(new Coordinate2D(GAME_SCENE.getWidth() - 1, GAME_SCENE.getHeight()) , speed));
+                spawn(new Trashcan(new Coordinate2D(GAME_SCENE.getWidth() - 1, GAME_SCENE.getHeight() - groundOffset) , currentSpeed));
                 break;
             case 3:
-                spawn(new Car(new Coordinate2D(GAME_SCENE.getWidth() - 1, GAME_SCENE.getHeight()) , speed));
+                spawn(new Car(new Coordinate2D(GAME_SCENE.getWidth() - 1, GAME_SCENE.getHeight() - groundOffset) , currentSpeed));
                 break;
             case 4:
                 break;
@@ -56,8 +56,4 @@ public class HostileEntitySpawner extends EntitySpawner {
         Random rand = new Random();
         return min + (rand.nextInt ((max - min) + 1));
     }
-
-    // functie om interval in te stellen/aanpassen.
-    // setIntervalInMs(long intervalInMs)
-
 }

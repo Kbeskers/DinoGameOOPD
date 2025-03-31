@@ -8,7 +8,8 @@ import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.scenes.SceneBorder;
 
 public abstract class HostileEntity extends DynamicSpriteEntity implements Collider, SceneBorderCrossingWatcher {
-    protected HostileEntity(String resource, Coordinate2D initialLocation, int speed) {
+
+    protected HostileEntity(String resource, Coordinate2D initialLocation, double speed) {
         super(resource, initialLocation);
         setMotion(speed, 270d);
         setAnchorPoint(AnchorPoint.BOTTOM_LEFT);

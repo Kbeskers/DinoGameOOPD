@@ -5,7 +5,7 @@ import com.github.hanyaeger.api.Coordinate2D;
 import java.util.Random;
 
 public class Car extends Obstacle {
-    public Car(Coordinate2D initialLocation, int speed) {
+    public Car(Coordinate2D initialLocation, double speed) {
         super("sprites/auto1.png", initialLocation, speed);
     }
 

@@ -48,7 +48,7 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer {
         scoreText.setAnchorPoint(AnchorPoint.TOP_RIGHT);
         addEntity(scoreText);
 
-        var player = new Player(new Coordinate2D(500, 500), GAME, this, scoreText, healthText);
+        var player = new Player(new Coordinate2D(100, 500), GAME, this, scoreText, healthText);
         addEntity(player);
 
         addEntity(new ParallaxBackground("backgrounds/lucht_achtergrond.png", new Coordinate2D(0, 0), new Size(getWidth() * 1.2, getHeight()), this, 104, 0.1));

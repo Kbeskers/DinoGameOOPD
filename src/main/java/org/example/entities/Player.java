@@ -1,6 +1,7 @@
 package org.example.entities;
 
 import com.github.hanyaeger.api.Coordinate2D;
+import com.github.hanyaeger.api.UpdateExposer;
 import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.Newtonian;
@@ -9,15 +10,22 @@ import com.github.hanyaeger.api.scenes.DynamicScene;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
 import org.example.DinoCommute;
+import org.example.entities.hostileEntity.enemy.Pterodactyl;
+import org.example.entities.hostileEntity.obstacle.Bike;
+import org.example.entities.hostileEntity.obstacle.Car;
+import org.example.entities.hostileEntity.obstacle.Trashcan;
+import org.example.entities.powerups.Coin;
+import org.example.entities.powerups.Heart;
+import org.example.entities.powerups.Sword;
 import org.example.ui.text.HealthText;
 import org.example.ui.text.ScoreText;
 
 import java.util.List;
 import java.util.Set;
 
-public class Player extends DynamicSpriteEntity implements KeyListener, Newtonian, Collider, Collided {
-    private DinoCommute game;
-    private DynamicScene gameScene;
+public class Player extends DynamicSpriteEntity implements KeyListener, Newtonian, Collider, Collided, UpdateExposer {
+    private final DinoCommute GAME;
+    private final DynamicScene GAME_SCENE;
 
     private ScoreText scoreText;
     private int score = 0;
@@ -25,37 +33,38 @@ public class Player extends DynamicSpriteEntity implements KeyListener, Newtonia
     private int health = 100;
     private int maxHealth = 100;
 
+    private long invicibleDuration;
+
 
     public Player(Coordinate2D initialLocation, DinoCommute game, DynamicScene gameScene, ScoreText scoreText, HealthText healthText) {
-        super("sprites/zwaard.png", initialLocation);
-        this.game = game;
-        this.gameScene = gameScene;
+        super("sprites/dino.png", initialLocation);
+        this.GAME = game;
+        this.GAME_SCENE = gameScene;
         this.scoreText = scoreText;
         this.healthText = healthText;
     }
 
     @Override
     public void onCollision(List<Collider> collidingObject) {
-//        for (Collider collider : collidingObject) {
-//            if (collider instanceof Enemy) {
-//                handleEnemyCollision();
-//            } else if (collider instanceof Obstacle) {
-//                handleObstacleCollision();
-//            } else if (collider instanceof CoinPowerup) {
-//                handleCoinCollision();
-//            } else if (collider instanceof HealthPowerup) {
-//                handleHealthCollision();
-//            } else if (collider instanceof SwordPowerup) {
-//                handleSwordCollision();
-//            }
-//        }
+        for (Collider collider : collidingObject) {
+            if (collider instanceof Pterodactyl) {
+                takeDamage(25);
+            } else if (collider instanceof Bike) {
+                takeDamage(10);
+            } else if (collider instanceof Car) {
+                takeDamage(20);
+            } else if (collider instanceof Trashcan) {
+                takeDamage(5);
+            } else if (collider instanceof Coin) {
+                handleCoinCollision();
+            } else if (collider instanceof Heart) {
+                handleHealthCollision();
+            } else if (collider instanceof Sword) {
+                handleSwordCollision();
+            }
+        }
     }
-    private void handleEnemyCollision() {
 
-    }
-    private void handleObstacleCollision() {
-
-    }
     private void handleCoinCollision() {
         score += 100;
     }
@@ -66,6 +75,13 @@ public class Player extends DynamicSpriteEntity implements KeyListener, Newtonia
 
     }
 
+    private void takeDamage(int damage) {
+        if (invicibleDuration <= 0) {
+            setHealth(health - damage);
+            invicibleDuration = 3000;
+            setOpacity(0.5);
+        }
+    }
     private void setHealth(int newHealth){
         if(newHealth > maxHealth){
             health = maxHealth;
@@ -74,7 +90,7 @@ public class Player extends DynamicSpriteEntity implements KeyListener, Newtonia
         }
         healthText.setHealthText(health);
         if(isDead()){
-            game.setActiveScene(2);
+            GAME.setActiveScene(2);
         }
     }
     private boolean isDead(){
@@ -87,8 +103,9 @@ public class Player extends DynamicSpriteEntity implements KeyListener, Newtonia
 
     @Override
     public void onPressedKeysChange(Set<KeyCode> set) {
+        System.out.println(getLocationInScene().getY());
         if(set.contains(KeyCode.UP) && isOnGround()){
-            setMotion(3,180d);
+            setMotion(15,180d);
         } else if(set.contains(KeyCode.DOWN)){
             //set bowing sprite
         } else {
@@ -97,18 +114,18 @@ public class Player extends DynamicSpriteEntity implements KeyListener, Newtonia
     }
 
     private boolean isOnGround(){
-        if (getAnchorLocation().getY() < 200) {
+        if (getLocationInScene().getY() >= getSceneHeight() - getHeight() - 100) {
             return true;
         } else {
             return false;
         }
     }
 
-//    public final void update(long timestamp){
-//        System.out.println(getLocationInScene().getY());
-//        if (getLocationInScene().getY() > getHeight()){
-//            setAnchorLocationY(getSceneHeight() - getHeight() - 1);
-//            setSpeed(0);
-//        }
-//    }
+    public final void explicitUpdate(long timestamp){
+        if (getLocationInScene().getY() > getSceneHeight() - getHeight() - 100){
+            setAnchorLocationY(getSceneHeight() - getHeight() - 100);
+            setSpeed(0);
+        }
+        System.out.println(timestamp);
+    }
 }
