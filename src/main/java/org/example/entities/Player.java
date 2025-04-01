@@ -27,19 +27,23 @@ public class Player extends DynamicSpriteEntity implements KeyListener, Newtonia
     private final DinoCommute GAME;
     private final DynamicScene GAME_SCENE;
 
-    private ScoreText scoreText;
+    private final ScoreText scoreText;
+    private final HealthText healthText;
+
     private int score = 0;
-    private HealthText healthText;
     private int health = 100;
     private int maxHealth = 100;
 
     private long invicibleDuration;
 
-    private double speedMultiplier;
+    private final int ANIMATION_SPEED = 200;
+    private double speedMultiplier = 1;
 
 
     public Player(Coordinate2D initialLocation, DinoCommute game, DynamicScene gameScene, ScoreText scoreText, HealthText healthText) {
-        super("sprites/dino.png", initialLocation);
+        super("sprites/Dinoanimaties.png", initialLocation, 2, 8);
+        setAutoCycle((long) (ANIMATION_SPEED / speedMultiplier));
+        setAutoCycleRow(0);
         this.GAME = game;
         this.GAME_SCENE = gameScene;
         this.scoreText = scoreText;
@@ -69,6 +73,7 @@ public class Player extends DynamicSpriteEntity implements KeyListener, Newtonia
 
     private void handleCoinCollision() {
         score += 100;
+        scoreText.setScoreText(score);
     }
     private void handleHealthCollision() {
        setHealth(health + 20);
@@ -81,7 +86,7 @@ public class Player extends DynamicSpriteEntity implements KeyListener, Newtonia
         if (invicibleDuration <= 0) {
             setHealth(health - damage);
             invicibleDuration = 3000;
-            setOpacity(0.5);
+            setOpacity(0.6);
         }
     }
     private void setHealth(int newHealth){
@@ -105,13 +110,9 @@ public class Player extends DynamicSpriteEntity implements KeyListener, Newtonia
 
     @Override
     public void onPressedKeysChange(Set<KeyCode> set) {
-        System.out.println(getLocationInScene().getY());
+        setSprite(set);
         if(set.contains(KeyCode.UP) && isOnGround()){
             setMotion(15,180d);
-        } else if(set.contains(KeyCode.DOWN)){
-            //set bowing sprite
-        } else {
-            //set running sprite
         }
     }
 
@@ -128,13 +129,19 @@ public class Player extends DynamicSpriteEntity implements KeyListener, Newtonia
             setAnchorLocationY(getSceneHeight() - getHeight() - 100);
             setSpeed(0);
         }
-        System.out.println(timestamp);
+
     }
 
-    public double getSpeedMultiplier() {
-        return speedMultiplier;
-    }
     public void setSpeedMultiplier(double speedMultiplier) {
         this.speedMultiplier = speedMultiplier;
+        setAutoCycle((long) (ANIMATION_SPEED / speedMultiplier));
+    }
+
+    private void setSprite(Set<KeyCode> set){
+        if (set.contains(KeyCode.DOWN) && isOnGround()) {
+            setAutoCycleRow(1);
+        } else {
+            setAutoCycleRow(0);
+        }
     }
 }

@@ -1,7 +1,6 @@
 package org.example.scenes;
 
 import com.github.hanyaeger.api.*;
-import com.github.hanyaeger.api.entities.EntitySpawner;
 import org.example.entities.Entityspawner;
 import com.github.hanyaeger.api.entities.YaegerEntity;
 import com.github.hanyaeger.api.scenes.DynamicScene;
@@ -15,7 +14,7 @@ import org.example.ui.text.ScoreText;
 
 public class GameScene extends DynamicScene implements EntitySpawnerContainer, TimerContainer {
     private final DinoCommute GAME;
-    private HostileEntitySpawner hostileSpawner;
+    private final HostileEntitySpawner HOSTILE_SPAWNER = new HostileEntitySpawner(this);;
     private Player player;
 
     public GameScene(DinoCommute dinoCommute) {
@@ -62,13 +61,12 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, T
     public void setupEntitySpawners() {
         addEntitySpawner(new Entityspawner());
 
-        this.hostileSpawner = new HostileEntitySpawner(this);
-        addEntitySpawner(hostileSpawner);
+        addEntitySpawner(HOSTILE_SPAWNER);
     }
 
     @Override
     public void setupTimers() {
-        var speedManager = new SpeedManager(player, hostileSpawner);
+        var speedManager = new SpeedManager(player, HOSTILE_SPAWNER);
         addTimer(speedManager);
     }
 }

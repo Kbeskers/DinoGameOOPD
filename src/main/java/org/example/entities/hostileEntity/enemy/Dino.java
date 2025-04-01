@@ -1,21 +1,20 @@
-package org.example.entities.hostileEntity.obstacle;
+package org.example.entities.hostileEntity.enemy;
 
 import com.github.hanyaeger.api.Coordinate2D;
 
 import java.util.Random;
 
-public class Car extends Obstacle {
-    public Car(Coordinate2D initialLocation, double speed) {
-        super(getRandomCarSprite(), initialLocation, speed);
+public class Dino extends Enemy {
+    public Dino(Coordinate2D initialLocation, double speed) {
+        super(getRandomDinoSprite(), initialLocation, speed);
     }
-
-    private static String getRandomCarSprite(){
+    private static String getRandomDinoSprite(){
         int randomIndex = random(0, 1);
         System.out.println(randomIndex);
         if (randomIndex == 0) {
-            return "sprites/auto1.png";
+            return "sprites/dino1.png";
         } else {
-            return "sprites/auto2.png";
+            return "sprites/dino2.png";
         }
     }
     private static int random(int min, int max) {

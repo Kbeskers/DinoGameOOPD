@@ -19,7 +19,8 @@ public class SpeedManager extends Timer {
 
     @Override
     public void onAnimationUpdate(long l) {
-        speedMultiplier += 0.05;
+        speedMultiplier += 0.02;
+        System.out.println(speedMultiplier);
         PLAYER.setSpeedMultiplier(speedMultiplier);
         SPAWNER.setSpeedMultiplier(speedMultiplier);
     }

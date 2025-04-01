@@ -13,15 +13,13 @@ import java.util.Random;
 public class HostileEntitySpawner extends EntitySpawner {
     private final DynamicScene GAME_SCENE;
 
-    private final double BASE_SPEED;
-    private double speedMultiplier;
+    private final double BASE_SPEED = 5;
+    private double speedMultiplier = 1;
 
     public HostileEntitySpawner( DynamicScene gameScene) {
         super(3000);//starting interval
 
         this.GAME_SCENE = gameScene;
-        BASE_SPEED = 5;
-        speedMultiplier = 1;
     }
 
     @Override
@@ -56,9 +54,6 @@ public class HostileEntitySpawner extends EntitySpawner {
         return min + (rand.nextInt ((max - min) + 1));
     }
 
-    public double getSpeedMultiplier() {
-        return speedMultiplier;
-    }
     public void setSpeedMultiplier(double speedMultiplier) {
         this.speedMultiplier = speedMultiplier;
     }

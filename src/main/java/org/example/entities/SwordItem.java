@@ -10,5 +10,5 @@ public class SwordItem extends DynamicSpriteEntity implements Collider {
     }
 
     //Write code to delete after x seconds
-    //needs different class for equipedsword, since player will delete normal sword power-up upon pickup
+    //needs different class for equipped sword, since player will delete normal sword power-up upon pickup
 }
