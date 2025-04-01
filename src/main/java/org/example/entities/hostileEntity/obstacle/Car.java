@@ -11,7 +11,7 @@ public class Car extends Obstacle {
 
     private static String getRandomCarSprite(){
         int randomIndex = random(0, 1);
-        System.out.println(randomIndex);
+        //System.out.println(randomIndex);
         if (randomIndex == 0) {
             return "sprites/auto1.png";
         } else {

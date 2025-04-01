@@ -7,6 +7,8 @@ import com.github.hanyaeger.api.entities.SceneBorderTouchingWatcher;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.scenes.SceneBorder;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class ParallaxBackground extends DynamicSpriteEntity implements SceneBorderTouchingWatcher {
     private final Size SIZE;
@@ -14,9 +16,13 @@ public class ParallaxBackground extends DynamicSpriteEntity implements SceneBord
     private final Coordinate2D INITIAL_LOCATION;
     private final GameScene GAME_SCENE;
     private final int VIEW_INDEX;
-    private final double SPEED;
+    private double SPEED;
+    private final double BASE_SPEED;
 
-    public ParallaxBackground(final String resource, final Coordinate2D initialLocation, final Size size, final GameScene scene, final int viewIndex, final double speed) {
+    private static final List<ParallaxBackground> instances = new ArrayList<>();
+    private static double SpeedMultiplier;
+
+    public ParallaxBackground(final String resource, final Coordinate2D initialLocation, final Size size, final GameScene scene, final int viewIndex, double base_speed) {
         super(resource, initialLocation, size);
 
         this.RESOURCE = resource;
@@ -24,24 +30,37 @@ public class ParallaxBackground extends DynamicSpriteEntity implements SceneBord
         this.SIZE = size;
         this.GAME_SCENE = scene;
         this.VIEW_INDEX = viewIndex;
-        this.SPEED = speed;
+        this.BASE_SPEED = base_speed;
+        this.SPEED = base_speed;
 
         setViewOrder(viewIndex);
         setPreserveAspectRatio(false);
-        setMotion(speed, Direction.LEFT);
+        setMotion(SPEED, Direction.LEFT);
+        instances.add(this);
     }
 
     @Override
     public void notifyBoundaryTouching(final SceneBorder border) {
-        if (border.equals(SceneBorder.LEFT) && Math.round(this.getAnchorLocation().getX() / SPEED) == -(int) ((this.SIZE.width() / SPEED) / ( (SIZE.width()/ GAME_SCENE.getWidth())
-                / ( ((SIZE.width()/ GAME_SCENE.getWidth())  - 1) )))) { //formule om de juiste interval tussen het laden van parrallax sprites te berekenen
+        if (border.equals(SceneBorder.LEFT) && Math.round(this.getAnchorLocation().getX() / SPEED) == -(int) ((this.SIZE.width() / SPEED) / ((SIZE.width() / GAME_SCENE.getWidth())
+                / (((SIZE.width() / GAME_SCENE.getWidth()) - 1))))) {
             var newLocation = new Coordinate2D(GAME_SCENE.getWidth(), INITIAL_LOCATION.getY());
-            GAME_SCENE.addEntity(new ParallaxBackground(RESOURCE, newLocation, SIZE, GAME_SCENE, VIEW_INDEX, SPEED));
-            System.out.println("ParallaxBackground added" + newLocation + getWidth());
+            var newBackground = new ParallaxBackground(RESOURCE, newLocation, SIZE, GAME_SCENE, VIEW_INDEX, BASE_SPEED);
+            newBackground.SPEED = newBackground.BASE_SPEED * SpeedMultiplier;
+            newBackground.setMotion(newBackground.SPEED, Direction.LEFT);
+            GAME_SCENE.addEntity(newBackground);
         }
 
         if (border.equals(SceneBorder.LEFT) && Math.round(this.getAnchorLocation().getX() / SPEED) == -(int) (this.SIZE.width() / SPEED)) {
             this.remove();
+        }
+    }
+
+    public static void setAllSpeeds(double speedMultiplier) {
+        SpeedMultiplier = speedMultiplier;
+
+        for (ParallaxBackground background : instances) {
+            background.SPEED = background.BASE_SPEED * speedMultiplier;
+            background.setMotion(background.SPEED, Direction.LEFT);
         }
     }
 }

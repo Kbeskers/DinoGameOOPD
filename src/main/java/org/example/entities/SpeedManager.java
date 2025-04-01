@@ -1,6 +1,7 @@
 package org.example.entities;
 
 import com.github.hanyaeger.api.Timer;
+import org.example.scenes.ParallaxBackground;
 
 public class SpeedManager extends Timer {
     private final Player PLAYER;
@@ -20,9 +21,10 @@ public class SpeedManager extends Timer {
     @Override
     public void onAnimationUpdate(long l) {
         speedMultiplier += 0.02;
-        System.out.println(speedMultiplier);
+        //System.out.println(speedMultiplier);
         PLAYER.setSpeedMultiplier(speedMultiplier);
         SPAWNER.setSpeedMultiplier(speedMultiplier);
+        ParallaxBackground.setAllSpeeds(speedMultiplier);
     }
     //class which will receive references to other classes which will scale with speed and will call "setSpeedMultiplier" functions
 }
