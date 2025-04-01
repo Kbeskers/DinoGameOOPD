@@ -1,22 +1,22 @@
 package org.example.scenes;
 
-import com.github.hanyaeger.api.AnchorPoint;
-import com.github.hanyaeger.api.Coordinate2D;
-import com.github.hanyaeger.api.EntitySpawnerContainer;
+import com.github.hanyaeger.api.*;
 import com.github.hanyaeger.api.entities.EntitySpawner;
 import org.example.entities.Entityspawner;
-import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.YaegerEntity;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import org.example.DinoCommute;
 import org.example.entities.HostileEntitySpawner;
 import org.example.entities.Player;
+import org.example.entities.SpeedManager;
 import org.example.ui.text.HealthText;
 import org.example.ui.text.HighScoreText;
 import org.example.ui.text.ScoreText;
 
-public class GameScene extends DynamicScene implements EntitySpawnerContainer {
+public class GameScene extends DynamicScene implements EntitySpawnerContainer, TimerContainer {
     private final DinoCommute GAME;
+    private HostileEntitySpawner hostileSpawner;
+    private Player player;
 
     public GameScene(DinoCommute dinoCommute) {
         GAME = dinoCommute;
@@ -48,7 +48,7 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer {
         scoreText.setAnchorPoint(AnchorPoint.TOP_RIGHT);
         addEntity(scoreText);
 
-        var player = new Player(new Coordinate2D(100, 500), GAME, this, scoreText, healthText);
+        this.player = new Player(new Coordinate2D(100, 500), GAME, this, scoreText, healthText);
         addEntity(player);
 
         addEntity(new ParallaxBackground("backgrounds/lucht_achtergrond.png", new Coordinate2D(0, 0), new Size(getWidth() * 1.2, getHeight()), this, 104, 0.1));
@@ -61,6 +61,14 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer {
     @Override
     public void setupEntitySpawners() {
         addEntitySpawner(new Entityspawner());
-        addEntitySpawner(new HostileEntitySpawner(this));
+
+        this.hostileSpawner = new HostileEntitySpawner(this);
+        addEntitySpawner(hostileSpawner);
+    }
+
+    @Override
+    public void setupTimers() {
+        var speedManager = new SpeedManager(player, hostileSpawner);
+        addTimer(speedManager);
     }
 }
