@@ -1,12 +1,11 @@
-package org.example.entities;
+package org.example.entities.player;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.UpdateExposer;
 import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
+import com.github.hanyaeger.api.entities.DynamicCompositeEntity;
 import com.github.hanyaeger.api.entities.Newtonian;
-import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
-import com.github.hanyaeger.api.scenes.DynamicScene;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
 import org.example.DinoCommute;
@@ -23,35 +22,38 @@ import org.example.ui.text.ScoreText;
 import java.util.List;
 import java.util.Set;
 
-public class Player extends DynamicSpriteEntity implements KeyListener, Newtonian, Collider, Collided, UpdateExposer {
+public class Player extends DynamicCompositeEntity implements KeyListener, Newtonian, UpdateExposer {
     private final DinoCommute GAME;
-    private final DynamicScene GAME_SCENE;
-
-    private final ScoreText scoreText;
-    private final HealthText healthText;
-
+    private final ScoreText SCORE_TEXT;
+    private final HealthText HEALTH_TEXT;
+    private PlayerSprite playerSprite;
+    private PlayerHitbox playerHitbox;
     private int score = 0;
     private int health = 100;
-    private int maxHealth = 100;
+    private final int MAX_HEALTH = 100;
 
     private long invicibleDuration;
 
-    private final int ANIMATION_SPEED = 200;
+    private final int ANIMATION_DURATION = 200;
     private double speedMultiplier = 1;
 
 
-    public Player(Coordinate2D initialLocation, DinoCommute game, DynamicScene gameScene, ScoreText scoreText, HealthText healthText) {
-        super("sprites/Dinoanimaties.png", initialLocation, 2, 8);
-        setAutoCycle((long) (ANIMATION_SPEED / speedMultiplier));
-        setAutoCycleRow(0);
+    public Player(Coordinate2D initialLocation, DinoCommute game, ScoreText scoreText, HealthText healthText) {
+        super(initialLocation);
         this.GAME = game;
-        this.GAME_SCENE = gameScene;
-        this.scoreText = scoreText;
-        this.healthText = healthText;
+        this.SCORE_TEXT = scoreText;
+        this.HEALTH_TEXT = healthText;
     }
 
     @Override
-    public void onCollision(List<Collider> collidingObject) {
+    protected void setupEntities() {
+        this.playerSprite = new PlayerSprite(new Coordinate2D(0, 0));
+        addEntity(playerSprite);
+        this.playerHitbox = new PlayerHitbox(new Coordinate2D(0, 0), this);
+        addEntity(playerHitbox);
+    }
+
+    public void handleCollision(List<Collider> collidingObject) {
         for (Collider collider : collidingObject) {
             if (collider instanceof Pterodactyl) {
                 takeDamage(25);
@@ -73,7 +75,7 @@ public class Player extends DynamicSpriteEntity implements KeyListener, Newtonia
 
     private void handleCoinCollision() {
         score += 100;
-        scoreText.setScoreText(score);
+        SCORE_TEXT.setScoreText(score);
     }
     private void handleHealthCollision() {
        setHealth(health + 20);
@@ -90,12 +92,12 @@ public class Player extends DynamicSpriteEntity implements KeyListener, Newtonia
         }
     }
     private void setHealth(int newHealth){
-        if(newHealth > maxHealth){
-            health = maxHealth;
+        if(newHealth > MAX_HEALTH){
+            health = MAX_HEALTH;
         } else {
             health = newHealth;
         }
-        healthText.setHealthText(health);
+        HEALTH_TEXT.setHealthText(health);
         if(isDead()){
             GAME.setActiveScene(2);
         }
@@ -134,14 +136,17 @@ public class Player extends DynamicSpriteEntity implements KeyListener, Newtonia
 
     public void setSpeedMultiplier(double speedMultiplier) {
         this.speedMultiplier = speedMultiplier;
-        setAutoCycle((long) (ANIMATION_SPEED / speedMultiplier));
+        playerSprite.setAnimationSpeed(speedMultiplier);
     }
 
     private void setSprite(Set<KeyCode> set){
+        System.out.print("Player is on ground: " + isOnGround());
         if (set.contains(KeyCode.DOWN) && isOnGround()) {
-            setAutoCycleRow(1);
+            playerSprite.setAnimationRow(1);
+            playerHitbox.setHitBoxLow();
         } else {
-            setAutoCycleRow(0);
+            playerSprite.setAnimationRow(0);
+            playerHitbox.setHitBoxHigh();
         }
     }
 }

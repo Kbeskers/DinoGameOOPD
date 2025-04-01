@@ -7,7 +7,7 @@ import com.github.hanyaeger.api.entities.YaegerEntity;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import org.example.DinoCommute;
 import org.example.entities.HostileEntitySpawner;
-import org.example.entities.Player;
+import org.example.entities.player.Player;
 import org.example.entities.SpeedManager;
 import org.example.ui.text.HealthText;
 import org.example.ui.text.HighScoreText;
@@ -53,7 +53,7 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, T
         scoreText.setAnchorPoint(AnchorPoint.TOP_RIGHT);
         addEntity(scoreText);
 
-        this.player = new Player(new Coordinate2D(100, 500), GAME, this, scoreText, healthText);
+        this.player = new Player(new Coordinate2D(100, 500), GAME, scoreText, healthText);
         addEntity(player);
 
         addEntity(new ParallaxBackground("backgrounds/lucht_achtergrond.png", new Coordinate2D(0, 0), new Size(getWidth() * 1.2, getHeight()), this, 104, 1.1));
