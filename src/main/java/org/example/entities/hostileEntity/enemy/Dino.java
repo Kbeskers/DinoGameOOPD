@@ -6,21 +6,6 @@ import java.util.Random;
 
 public class Dino extends Enemy {
     public Dino(Coordinate2D initialLocation, double speed) {
-        super(getRandomDinoSprite(), initialLocation, speed);
-    }
-
-    private static String getRandomDinoSprite() {
-        int randomIndex = randomMinMax(0, 1);
-        //System.out.println(randomIndex);
-        if (randomIndex == 0) {
-            return "sprites/dino1.png";
-        } else {
-            return "sprites/dino2.png";
-        }
-    }
-
-    private static int randomMinMax(int min, int max) {
-        Random rand = new Random();
-        return min + (rand.nextInt((max - min) + 1));
+        super(getRandomSprite("sprites/dino1.png", "sprites/dino2.png"), initialLocation, speed, 40);
     }
 }

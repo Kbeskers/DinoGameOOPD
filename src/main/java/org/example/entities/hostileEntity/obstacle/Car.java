@@ -6,21 +6,6 @@ import java.util.Random;
 
 public class Car extends Obstacle {
     public Car(Coordinate2D initialLocation, double speed) {
-        super(getRandomCarSprite(), initialLocation, speed);
-    }
-
-    private static String getRandomCarSprite() {
-        int randomIndex = randomMinMax(0, 1);
-        //System.out.println(randomIndex);
-        if (randomIndex == 0) {
-            return "sprites/auto1.png";
-        } else {
-            return "sprites/auto2.png";
-        }
-    }
-
-    private static int randomMinMax(int min, int max) {
-        Random rand = new Random();
-        return min + (rand.nextInt((max - min) + 1));
+        super(getRandomSprite("sprites/auto1.png", "sprites/auto2.png"), initialLocation, speed, 20);
     }
 }

@@ -9,8 +9,8 @@ import org.example.entities.hostileEntity.HostileEntity;
 import java.util.List;
 
 public abstract class Enemy extends HostileEntity implements Collided {
-    protected Enemy(String resource, Coordinate2D initialLocation, double speed) {
-        super(resource, initialLocation, speed);
+    protected Enemy(String resource, Coordinate2D initialLocation, double speed, int damage) {
+        super(resource, initialLocation, speed, damage);
     }
     @Override
     public void onCollision(List<Collider> collidingObject) {

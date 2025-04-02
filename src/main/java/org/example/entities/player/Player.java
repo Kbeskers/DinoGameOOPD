@@ -8,6 +8,7 @@ import com.github.hanyaeger.api.entities.Newtonian;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
 import org.example.DinoCommute;
+import org.example.entities.hostileEntity.HostileEntity;
 import org.example.entities.hostileEntity.enemy.Pterodactyl;
 import org.example.entities.hostileEntity.obstacle.Bike;
 import org.example.entities.hostileEntity.obstacle.Car;
@@ -59,14 +60,8 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
 
     public void handleCollision(List<Collider> collidingObject) {
         for (Collider collider : collidingObject) {
-            if (collider instanceof Pterodactyl) {
-                takeDamage(25);
-            } else if (collider instanceof Bike) {
-                takeDamage(10);
-            } else if (collider instanceof Car) {
-                takeDamage(20);
-            } else if (collider instanceof Trashcan) {
-                takeDamage(5);
+            if (collider instanceof HostileEntity) {
+                takeDamage(((HostileEntity) collider).getDamage());
             } else if (collider instanceof Coin) {
                 pickupCoin();
             } else if (collider instanceof Heart) {
