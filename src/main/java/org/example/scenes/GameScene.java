@@ -26,11 +26,7 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, T
 
     @Override
     public void setupScene() {
-//        new Image(getClass().getResource("/backgrounds/lucht_achtergrond.png").toExternalForm(), false);
-//        new Image(getClass().getResource("/backgrounds/gebouwen_achter_achtergrond.png").toExternalForm(), false);
-//        new Image(getClass().getResource("/backgrounds/gebouwen_achtergrond.png").toExternalForm(), false);
-//        new Image(getClass().getResource("/backgrounds/gebouwen_voorgrond.png").toExternalForm(), false);
-//        new Image(getClass().getResource("/backgrounds/straat_voorgrond.png").toExternalForm(), false);
+
     }
 
 

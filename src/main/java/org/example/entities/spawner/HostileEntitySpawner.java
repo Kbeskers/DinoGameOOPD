@@ -12,46 +12,41 @@ import java.util.Random;
 
 public class HostileEntitySpawner extends EntitySpawner {
     private final DynamicScene GAME_SCENE;
-
+    private final Random random = new Random();
     private final double BASE_SPEED = 5;
     private double speedMultiplier = 1;
 
+    private static final double PTERODACTYL_CHANCE = 0.25;
+    private static final double BIKE_CHANCE = 0.25;
+    private static final double TRASHCAN_CHANCE = 0.4;
+    private static final double CAR_CHANCE = 0.1;
+
+
     public HostileEntitySpawner(DynamicScene gameScene) {
         super(3000);//starting interval
-
         this.GAME_SCENE = gameScene;
     }
 
     @Override
     protected void spawnEntities() {
-        int rand = random(0, 3);
+        double rand = random.nextDouble();
         double currentSpeed = BASE_SPEED * speedMultiplier;
         int groundOffset = 100;
-        switch (rand) {
-            case 0:
-                spawn(new Pterodactyl(new Coordinate2D(GAME_SCENE.getWidth() - 1, random(200, (int) GAME_SCENE.getHeight())), currentSpeed));
-                break;
-            case 1:
-                spawn(new Bike(new Coordinate2D(GAME_SCENE.getWidth() - 1, GAME_SCENE.getHeight() - groundOffset), currentSpeed));
-                break;
-            case 2:
-                spawn(new Trashcan(new Coordinate2D(GAME_SCENE.getWidth() - 1, GAME_SCENE.getHeight() - groundOffset), currentSpeed));
-                break;
-            case 3:
-                spawn(new Car(new Coordinate2D(GAME_SCENE.getWidth() - 1, GAME_SCENE.getHeight() - groundOffset), currentSpeed));
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
+        System.out.println(rand);
+
+        if (rand < PTERODACTYL_CHANCE) {
+            spawn(new Pterodactyl(new Coordinate2D(GAME_SCENE.getWidth() - 1, randomDouble(200, GAME_SCENE.getHeight())), currentSpeed));
+        } else if (rand < PTERODACTYL_CHANCE + BIKE_CHANCE) {
+            spawn(new Bike(new Coordinate2D(GAME_SCENE.getWidth() - 1, GAME_SCENE.getHeight() - groundOffset), currentSpeed));
+        } else if (rand < PTERODACTYL_CHANCE + BIKE_CHANCE + TRASHCAN_CHANCE) {
+            spawn(new Trashcan(new Coordinate2D(GAME_SCENE.getWidth() - 1, GAME_SCENE.getHeight() - groundOffset), currentSpeed));
+        } else if (rand < PTERODACTYL_CHANCE + BIKE_CHANCE + TRASHCAN_CHANCE + CAR_CHANCE) {
+            spawn(new Car(new Coordinate2D(GAME_SCENE.getWidth() - 1, GAME_SCENE.getHeight() - groundOffset), currentSpeed));
         }
     }
 
-    private int random(int min, int max) {
-        Random rand = new Random();
-        return min + (rand.nextInt((max - min) + 1));
+    private double randomDouble(double min, double max) {
+        return min + (random.nextDouble() * (max - min));
     }
 
     public void setSpeedMultiplier(double speedMultiplier) {
