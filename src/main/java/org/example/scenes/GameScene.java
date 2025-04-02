@@ -8,6 +8,7 @@ import org.example.DinoCommute;
 import org.example.entities.spawner.HostileEntitySpawner;
 import org.example.entities.player.Player;
 import org.example.entities.SpeedManager;
+import org.example.entities.spawner.PowerUpSpawner;
 import org.example.ui.text.HealthText;
 import org.example.ui.text.HighScoreText;
 import org.example.ui.text.ScoreText;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 public class GameScene extends DynamicScene implements EntitySpawnerContainer, TimerContainer {
     private final DinoCommute GAME;
     private final HostileEntitySpawner HOSTILE_SPAWNER = new HostileEntitySpawner(this);
+    private final PowerUpSpawner POWERUP_SPAWNER = new PowerUpSpawner(this);
     private Player player;
 
     public GameScene(DinoCommute dinoCommute) {
@@ -28,7 +30,6 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, T
     public void setupScene() {
 
     }
-
 
     @Override
     public void addEntity(final YaegerEntity yaegerEntity) {
@@ -67,11 +68,12 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, T
     public void setupEntitySpawners() {
         addEntitySpawner(new Entityspawner());
         addEntitySpawner(HOSTILE_SPAWNER);
+        addEntitySpawner(POWERUP_SPAWNER);
     }
 
     @Override
     public void setupTimers() {
-        var speedManager = new SpeedManager(player, HOSTILE_SPAWNER);
+        var speedManager = new SpeedManager(player, HOSTILE_SPAWNER, POWERUP_SPAWNER);
         addTimer(speedManager);
     }
 }

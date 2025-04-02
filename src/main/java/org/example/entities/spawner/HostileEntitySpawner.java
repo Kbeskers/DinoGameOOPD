@@ -18,7 +18,7 @@ import java.util.Random;
 public class HostileEntitySpawner extends EntitySpawner {
     private final DynamicScene GAME_SCENE;
     private final Random random = new Random();
-    private final double BASE_SPEED = 2.0;
+    private final double BASE_SPEED = 2;
     private double speedMultiplier = 1;
 
     private final double PTERODACTYL_CHANCE = 0.25;
@@ -52,8 +52,11 @@ public class HostileEntitySpawner extends EntitySpawner {
         } else {
             return;
         }
+        if (!(entity instanceof Pterodactyl)) {
         spawnedEntities.add(entity);
+        }
         spawn(entity);
+
     }
 
     private double currentSpeed() {

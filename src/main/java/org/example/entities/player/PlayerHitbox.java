@@ -10,8 +10,8 @@ import java.util.List;
 
 public class PlayerHitbox extends RectangleEntity implements Collider, Collided {
     private final Player PLAYER;
-    private final double WIDTH = 200;
-    private final double HEIGHT = 200;
+    private final double WIDTH = 150;
+    private final double HEIGHT = 190;
 
     public PlayerHitbox(Coordinate2D initialLocation, Player player) {
         super(initialLocation);
@@ -28,6 +28,7 @@ public class PlayerHitbox extends RectangleEntity implements Collider, Collided 
 
     protected void setHitBoxHigh() {
         setAnchorLocationY(0);
+        setAnchorLocationX(WIDTH/5);
         setWidth(WIDTH);
         setHeight(HEIGHT);
     }
