@@ -12,9 +12,11 @@ public class PlayerSprite extends DynamicSpriteEntity {
         setAutoCycle(ANIMATION_DURATION);
         setAutoCycleRow(0);
     }
+
     protected void setAnimationSpeed(double speedMultiplier) {
         setAutoCycle((long) (ANIMATION_DURATION / speedMultiplier));
     }
+
     protected void setAnimationRow(int row) {
         setAutoCycleRow(row);
     }

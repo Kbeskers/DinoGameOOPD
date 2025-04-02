@@ -1,4 +1,4 @@
-package org.example.entities.powerups;
+package org.example.entities.powerup;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.entities.Collided;
@@ -11,6 +11,7 @@ public abstract class Powerup extends DynamicSpriteEntity implements Collider, C
     protected Powerup(String resource, Coordinate2D initialLocation) {
         super(resource, initialLocation);
     }
+
     @Override
     public void onCollision(List<Collider> list) {
         remove();

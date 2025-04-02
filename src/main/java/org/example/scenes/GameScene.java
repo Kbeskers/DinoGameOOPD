@@ -1,12 +1,11 @@
 package org.example.scenes;
 
 import com.github.hanyaeger.api.*;
-import javafx.scene.image.Image;
 import org.example.entities.Entityspawner;
 import com.github.hanyaeger.api.entities.YaegerEntity;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import org.example.DinoCommute;
-import org.example.entities.HostileEntitySpawner;
+import org.example.entities.spawner.HostileEntitySpawner;
 import org.example.entities.player.Player;
 import org.example.entities.SpeedManager;
 import org.example.ui.text.HealthText;
@@ -57,7 +56,7 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, T
         addEntity(player);
 
         addEntity(new ParallaxBackground("backgrounds/lucht_achtergrond.png", new Coordinate2D(0, 0), new Size(getWidth() * 1.2, getHeight()), this, 104, 1.1));
-        addEntity(new ParallaxBackground("backgrounds/gebouwen_achter_achtergrond.png", new Coordinate2D(0, 0), new Size(getWidth() * 1.2,    getHeight()), this, 103, 1.3));
+        addEntity(new ParallaxBackground("backgrounds/gebouwen_achter_achtergrond.png", new Coordinate2D(0, 0), new Size(getWidth() * 1.2, getHeight()), this, 103, 1.3));
         addEntity(new ParallaxBackground("backgrounds/gebouwen_achtergrond.png", new Coordinate2D(0, 0), new Size(getWidth() * 1.2, getHeight()), this, 102, 1.5));
         addEntity(new ParallaxBackground("backgrounds/gebouwen_voorgrond.png", new Coordinate2D(0, 0), new Size(getWidth() * 1.2, getHeight()), this, 101, 1.7));
         addEntity(new ParallaxBackground("backgrounds/straat_voorgrond.png", new Coordinate2D(0, 0), new Size(getWidth() * 1.2, getHeight()), this, 100, 2));

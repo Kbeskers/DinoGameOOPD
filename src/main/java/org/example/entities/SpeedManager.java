@@ -2,11 +2,11 @@ package org.example.entities;
 
 import com.github.hanyaeger.api.Timer;
 import org.example.entities.player.Player;
+import org.example.entities.spawner.HostileEntitySpawner;
 import org.example.scenes.ParallaxBackground;
 
 public class SpeedManager extends Timer {
     private final Player PLAYER;
-    //private final ParalaxBackground BACKGROUND;
     private final HostileEntitySpawner SPAWNER;
 
     private double speedMultiplier;

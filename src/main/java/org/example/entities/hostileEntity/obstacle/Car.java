@@ -9,7 +9,7 @@ public class Car extends Obstacle {
         super(getRandomCarSprite(), initialLocation, speed);
     }
 
-    private static String getRandomCarSprite(){
+    private static String getRandomCarSprite() {
         int randomIndex = randomMinMax(0, 1);
         //System.out.println(randomIndex);
         if (randomIndex == 0) {
@@ -18,8 +18,9 @@ public class Car extends Obstacle {
             return "sprites/auto2.png";
         }
     }
+
     private static int randomMinMax(int min, int max) {
         Random rand = new Random();
-        return min + (rand.nextInt ((max - min) + 1));
+        return min + (rand.nextInt((max - min) + 1));
     }
 }

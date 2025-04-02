@@ -1,4 +1,4 @@
-package org.example.entities.powerups;
+package org.example.entities.powerup;
 
 import com.github.hanyaeger.api.Coordinate2D;
 

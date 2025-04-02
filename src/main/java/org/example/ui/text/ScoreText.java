@@ -6,7 +6,8 @@ public class ScoreText extends Text {
     public ScoreText(Coordinate2D initialLocation, int size) {
         super(initialLocation, size, "Score: 0");
     }
-    public void setScoreText(int score){
+
+    public void setScoreText(int score) {
         setText("Score: " + score);
     }
 }

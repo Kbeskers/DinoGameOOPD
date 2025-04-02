@@ -8,7 +8,8 @@ public class Dino extends Enemy {
     public Dino(Coordinate2D initialLocation, double speed) {
         super(getRandomDinoSprite(), initialLocation, speed);
     }
-    private static String getRandomDinoSprite(){
+
+    private static String getRandomDinoSprite() {
         int randomIndex = randomMinMax(0, 1);
         //System.out.println(randomIndex);
         if (randomIndex == 0) {
@@ -17,8 +18,9 @@ public class Dino extends Enemy {
             return "sprites/dino2.png";
         }
     }
+
     private static int randomMinMax(int min, int max) {
         Random rand = new Random();
-        return min + (rand.nextInt ((max - min) + 1));
+        return min + (rand.nextInt((max - min) + 1));
     }
 }

@@ -1,4 +1,4 @@
-package org.example.entities;
+package org.example.entities.spawner;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.entities.EntitySpawner;
@@ -16,7 +16,7 @@ public class HostileEntitySpawner extends EntitySpawner {
     private final double BASE_SPEED = 5;
     private double speedMultiplier = 1;
 
-    public HostileEntitySpawner( DynamicScene gameScene) {
+    public HostileEntitySpawner(DynamicScene gameScene) {
         super(3000);//starting interval
 
         this.GAME_SCENE = gameScene;
@@ -27,18 +27,18 @@ public class HostileEntitySpawner extends EntitySpawner {
         int rand = random(0, 3);
         double currentSpeed = BASE_SPEED * speedMultiplier;
         int groundOffset = 100;
-        switch(rand) {
+        switch (rand) {
             case 0:
-                spawn(new Pterodactyl(new Coordinate2D(GAME_SCENE.getWidth() - 1, random(200, (int) GAME_SCENE.getHeight())) , currentSpeed));
+                spawn(new Pterodactyl(new Coordinate2D(GAME_SCENE.getWidth() - 1, random(200, (int) GAME_SCENE.getHeight())), currentSpeed));
                 break;
             case 1:
-                spawn(new Bike(new Coordinate2D(GAME_SCENE.getWidth() - 1, GAME_SCENE.getHeight() - groundOffset) , currentSpeed));
+                spawn(new Bike(new Coordinate2D(GAME_SCENE.getWidth() - 1, GAME_SCENE.getHeight() - groundOffset), currentSpeed));
                 break;
             case 2:
-                spawn(new Trashcan(new Coordinate2D(GAME_SCENE.getWidth() - 1, GAME_SCENE.getHeight() - groundOffset) , currentSpeed));
+                spawn(new Trashcan(new Coordinate2D(GAME_SCENE.getWidth() - 1, GAME_SCENE.getHeight() - groundOffset), currentSpeed));
                 break;
             case 3:
-                spawn(new Car(new Coordinate2D(GAME_SCENE.getWidth() - 1, GAME_SCENE.getHeight() - groundOffset) , currentSpeed));
+                spawn(new Car(new Coordinate2D(GAME_SCENE.getWidth() - 1, GAME_SCENE.getHeight() - groundOffset), currentSpeed));
                 break;
             case 4:
                 break;
@@ -51,7 +51,7 @@ public class HostileEntitySpawner extends EntitySpawner {
 
     private int random(int min, int max) {
         Random rand = new Random();
-        return min + (rand.nextInt ((max - min) + 1));
+        return min + (rand.nextInt((max - min) + 1));
     }
 
     public void setSpeedMultiplier(double speedMultiplier) {
