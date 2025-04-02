@@ -6,6 +6,6 @@ import java.util.Random;
 
 public class Dino extends Enemy {
     public Dino(Coordinate2D initialLocation, double speed) {
-        super(getRandomSprite("sprites/dino1.png", "sprites/dino2.png"), initialLocation, speed, 40);
+        super(getRandomSprite("sprites/Vijandige_dino1.png", "sprites/Vijandige_dino2.png"), initialLocation, speed + 1, 40);
     }
 }

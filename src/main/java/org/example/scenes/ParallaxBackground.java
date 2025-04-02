@@ -45,7 +45,7 @@ public class ParallaxBackground extends DynamicSpriteEntity implements SceneBord
 
     private int calculateWidthInterval() {
         return -(int) ((this.SIZE.width() / speed) /
-                ((SIZE.width() / GAME_SCENE.getWidth()) / (((SIZE.width() / GAME_SCENE.getWidth()) - 1))));
+                ((SIZE.width() / GAME_SCENE.getWidth()) / (((SIZE.width() / GAME_SCENE.getWidth()) - 1.01))));
     }
 
     private boolean shouldCreateNewBackground() {
