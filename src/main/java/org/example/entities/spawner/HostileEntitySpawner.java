@@ -33,7 +33,6 @@ public class HostileEntitySpawner extends EntitySpawner {
         this.GAME_SCENE = gameScene;
     }
 
-
     @Override
     protected void spawnEntities() {
         double rand = random.nextDouble();
@@ -53,10 +52,9 @@ public class HostileEntitySpawner extends EntitySpawner {
             return;
         }
         if (!(entity instanceof Pterodactyl)) {
-        spawnedEntities.add(entity);
+            spawnedEntities.add(entity);
         }
         spawn(entity);
-
     }
 
     private double currentSpeed() {

@@ -37,11 +37,11 @@ public class PowerUpSpawner extends EntitySpawner {
 
         Powerup entity;
         if (rand < COIN_CHANCE) {
-            entity = new Coin(new Coordinate2D(GAME_SCENE.getWidth() - 1, GAME_SCENE.getHeight() - groundOffset));
+            entity = new Coin(new Coordinate2D(GAME_SCENE.getWidth() - 1, GAME_SCENE.getHeight() - groundOffset), currentSpeed());
         } else if (rand < COIN_CHANCE + HEART_CHANCE) {
-            entity = new Heart(new Coordinate2D(GAME_SCENE.getWidth() - 1, GAME_SCENE.getHeight() - groundOffset));
+            entity = new Heart(new Coordinate2D(GAME_SCENE.getWidth() - 1, GAME_SCENE.getHeight() - groundOffset), currentSpeed());
         } else if (rand < COIN_CHANCE + HEART_CHANCE + SWORD_CHANCE) {
-            entity = new Sword(new Coordinate2D(GAME_SCENE.getWidth() - 1, GAME_SCENE.getHeight() - groundOffset));
+            entity = new Sword(new Coordinate2D(GAME_SCENE.getWidth() - 1, GAME_SCENE.getHeight() - groundOffset), currentSpeed());
         } else {
             return;
         }
