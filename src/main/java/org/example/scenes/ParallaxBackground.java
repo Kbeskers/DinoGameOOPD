@@ -22,6 +22,7 @@ public class ParallaxBackground extends DynamicSpriteEntity implements SceneBord
     private static final List<ParallaxBackground> instances = new ArrayList<>();
     private static double SpeedMultiplier;
 
+   // private static int totalInstancesCreated = 0;
     public ParallaxBackground(final String resource, final Coordinate2D initialLocation, final Size size, final GameScene scene, final int viewIndex, double base_speed) {
         super(resource, initialLocation, size);
 
@@ -37,6 +38,16 @@ public class ParallaxBackground extends DynamicSpriteEntity implements SceneBord
         setPreserveAspectRatio(false);
         setMotion(SPEED, Direction.LEFT);
         instances.add(this);
+
+        //debugging
+//
+//        totalInstancesCreated++;
+//
+//        System.out.println("New Parallax Background loaded!");
+//        System.out.println("Total instances created: " + totalInstancesCreated);
+//        System.out.println("Current active instances: " + instances.size());
+//        System.out.println("Resource: " + resource);
+//        System.out.println("----------------------------------------");
     }
 
     @Override
@@ -52,11 +63,13 @@ public class ParallaxBackground extends DynamicSpriteEntity implements SceneBord
 
         if (border.equals(SceneBorder.LEFT) && Math.round(this.getAnchorLocation().getX() / SPEED) == -(int) (this.SIZE.width() / SPEED)) {
             this.remove();
+            instances.remove(this);
         }
     }
 
     public static void setAllSpeeds(double speedMultiplier) {
         SpeedMultiplier = speedMultiplier;
+        //System.out.println("SpeedMultiplier: " + instances);
 
         for (ParallaxBackground background : instances) {
             background.SPEED = background.BASE_SPEED * speedMultiplier;
