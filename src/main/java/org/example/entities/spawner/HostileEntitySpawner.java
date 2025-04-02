@@ -39,7 +39,7 @@ public class HostileEntitySpawner extends EntitySpawner {
     protected void spawnEntities() {
         double rand = random.nextDouble();
         int groundOffset = 100;
-        System.out.println(rand);
+        //System.out.println(rand);
 
         HostileEntity entity;
         if (rand < PTERODACTYL_CHANCE) {

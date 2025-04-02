@@ -6,6 +6,8 @@ import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
+import org.example.entities.hostileEntity.HostileEntity;
+import org.example.entities.player.PlayerHitbox;
 
 import java.util.List;
 
@@ -23,7 +25,11 @@ public abstract class Powerup extends DynamicSpriteEntity implements Collider, C
     }
 
     @Override
-    public void onCollision(List<Collider> list) {
-        remove();
+    public void onCollision(List<Collider> collidingObject) {
+        for (Collider collider : collidingObject) {
+            if (collider instanceof PlayerHitbox) {
+                remove();
+            }
+        }
     }
 }

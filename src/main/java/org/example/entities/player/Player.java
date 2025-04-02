@@ -1,7 +1,6 @@
 package org.example.entities.player;
 
 import com.github.hanyaeger.api.Coordinate2D;
-import com.github.hanyaeger.api.Timer;
 import com.github.hanyaeger.api.TimerContainer;
 import com.github.hanyaeger.api.UpdateExposer;
 import com.github.hanyaeger.api.entities.Collider;
@@ -11,10 +10,7 @@ import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
 import org.example.DinoCommute;
 import org.example.entities.hostileEntity.HostileEntity;
-import org.example.entities.hostileEntity.enemy.Pterodactyl;
-import org.example.entities.hostileEntity.obstacle.Bike;
-import org.example.entities.hostileEntity.obstacle.Car;
-import org.example.entities.hostileEntity.obstacle.Trashcan;
+import org.example.entities.sword.SwordItem;
 import org.example.entities.powerup.Coin;
 import org.example.entities.powerup.Heart;
 import org.example.entities.powerup.Sword;
@@ -31,12 +27,12 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
     private PlayerSprite playerSprite;
     private PlayerHitbox playerHitbox;
     private InvincibilityTimer invincibilityTimer;
+    private SwordItem swordItem;
 
     private int score = 0;
     private int health = 100;
     private final int MAX_HEALTH = 100;
     private boolean invincible;
-
 
     public Player(Coordinate2D initialLocation, DinoCommute game, ScoreText scoreText, HealthText healthText) {
         super(initialLocation);
@@ -51,6 +47,8 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
         addEntity(playerSprite);
         this.playerHitbox = new PlayerHitbox(new Coordinate2D(0, 0), this);
         addEntity(playerHitbox);
+        this.swordItem = new SwordItem(new Coordinate2D(0, 0),5000);
+        addEntity(swordItem);
     }
 
     @Override
@@ -85,17 +83,17 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
     }
 
     private void pickupSword() {
-
+        swordItem.setSwordActive(true);
     }
 
     private void takeDamage(int damage) {
         if (!invincible) {
             setHealth(health - damage);
             setInvincible(true);
-            invincibilityTimer.reset();
-            invincibilityTimer.resume();
+            StartInvincibiltyTimer(2000);
         }
     }
+
     protected void setInvincible(boolean state) {
         invincible = state;
         if (state) {
@@ -103,6 +101,12 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
         } else {
             setOpacity(1);
         }
+    }
+
+    protected void StartInvincibiltyTimer(int duration){
+        invincibilityTimer.setIntervalInMs(duration);
+        invincibilityTimer.reset();
+        invincibilityTimer.resume();
     }
 
     private void setHealth(int newHealth) {

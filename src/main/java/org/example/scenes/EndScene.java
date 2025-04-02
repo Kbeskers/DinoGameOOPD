@@ -32,14 +32,11 @@ public class EndScene extends StaticScene {
         int textSize = 30;
 
         ArrayList<Text> textEntities = new ArrayList<>();
-        textEntities.add(new HealthText(new Coordinate2D(offset, offset), textSize));
         textEntities.add(new HighScoreText(new Coordinate2D(getWidth() - offset, offset), textSize));
         textEntities.add(new ScoreText(new Coordinate2D(getWidth() - offset, (offset * 2) + textSize), textSize));
         textEntities.add(new Text(new Coordinate2D(getWidth() / 2, (getHeight() / 2) - 70), 80, "Game Over"));
         for (Text text : textEntities) {
-            if (text instanceof HealthText) {
-                text.setAnchorPoint(AnchorPoint.TOP_LEFT);
-            } else if (text instanceof HighScoreText || text instanceof ScoreText) {
+            if (text instanceof HighScoreText || text instanceof ScoreText) {
                 text.setAnchorPoint(AnchorPoint.TOP_RIGHT);
             } else if (text instanceof Text) {
                 text.setAnchorPoint(AnchorPoint.CENTER_CENTER);
