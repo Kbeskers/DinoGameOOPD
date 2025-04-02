@@ -11,6 +11,9 @@ import org.example.entities.SpeedManager;
 import org.example.ui.text.HealthText;
 import org.example.ui.text.HighScoreText;
 import org.example.ui.text.ScoreText;
+import org.example.ui.text.Text;
+
+import java.util.ArrayList;
 
 public class GameScene extends DynamicScene implements EntitySpawnerContainer, TimerContainer {
     private final DinoCommute GAME;
@@ -40,19 +43,21 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, T
     public void setupEntities() {
         int offset = (int) (getWidth() / 50);
         int textSize = 30;
-        var healthText = new HealthText(new Coordinate2D(offset, offset), textSize);
-        healthText.setAnchorPoint(AnchorPoint.TOP_LEFT);
-        addEntity(healthText);
 
-        var highScoreText = new HighScoreText(new Coordinate2D(getWidth() - offset, offset), textSize);
-        highScoreText.setAnchorPoint(AnchorPoint.TOP_RIGHT);
-        addEntity(highScoreText);
+        ArrayList<Text> textEntities = new ArrayList<>();
+        textEntities.add(new HealthText(new Coordinate2D(offset, offset), textSize));
+        textEntities.add(new HighScoreText(new Coordinate2D(getWidth() - offset, offset), textSize));
+        textEntities.add(new ScoreText(new Coordinate2D(getWidth() - offset, (offset * 2) + textSize), textSize));
+        for (Text text : textEntities) {
+            if (text instanceof HealthText) {
+                text.setAnchorPoint(AnchorPoint.TOP_LEFT);
+            } else if (text instanceof HighScoreText || text instanceof ScoreText) {
+                text.setAnchorPoint(AnchorPoint.TOP_RIGHT);
+            }
+            addEntity(text);
+        }
 
-        var scoreText = new ScoreText(new Coordinate2D(getWidth() - offset, (offset * 2) + textSize), textSize);
-        scoreText.setAnchorPoint(AnchorPoint.TOP_RIGHT);
-        addEntity(scoreText);
-
-        this.player = new Player(new Coordinate2D(100, 500), GAME, scoreText, healthText);
+        this.player = new Player(new Coordinate2D(100, 500), GAME, (ScoreText) textEntities.get(2), (HealthText) textEntities.get(0));
         addEntity(player);
 
         addEntity(new ParallaxBackground("backgrounds/lucht_achtergrond.png", new Coordinate2D(0, 0), new Size(getWidth() * 1.2, getHeight()), this, 104, 1.1));

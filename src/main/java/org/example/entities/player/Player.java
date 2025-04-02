@@ -106,7 +106,6 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
     }
 
     private void setAnimation(Set<KeyCode> set) {
-        System.out.print("Player is on ground: " + isOnGround());
         if (set.contains(KeyCode.DOWN) && isOnGround()) {
             playerSprite.setAnimationRow(1);
             playerHitbox.setHitBoxLow();
@@ -141,6 +140,5 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
             setAnchorLocationY(getSceneHeight() - getHeight() - 100);
             setSpeed(0);
         }
-
     }
 }
