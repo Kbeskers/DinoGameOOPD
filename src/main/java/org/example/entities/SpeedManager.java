@@ -24,6 +24,6 @@ public class SpeedManager extends Timer {
         speedMultiplier += 0.02;
         PLAYER.setSpeedMultiplier(speedMultiplier);
         SPAWNER.setSpeedMultiplier(speedMultiplier);
-        ParallaxBackground.setAllSpeeds(speedMultiplier);
+        ParallaxBackground.setAllBackgroundSpeeds(speedMultiplier);
     }
 }
