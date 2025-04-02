@@ -1,6 +1,8 @@
 package org.example.entities.player;
 
 import com.github.hanyaeger.api.Coordinate2D;
+import com.github.hanyaeger.api.Timer;
+import com.github.hanyaeger.api.TimerContainer;
 import com.github.hanyaeger.api.UpdateExposer;
 import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.DynamicCompositeEntity;
@@ -22,17 +24,18 @@ import org.example.ui.text.ScoreText;
 import java.util.List;
 import java.util.Set;
 
-public class Player extends DynamicCompositeEntity implements KeyListener, Newtonian, UpdateExposer {
+public class Player extends DynamicCompositeEntity implements KeyListener, Newtonian, UpdateExposer, TimerContainer {
     private final DinoCommute GAME;
     private final ScoreText SCORE_TEXT;
     private final HealthText HEALTH_TEXT;
     private PlayerSprite playerSprite;
     private PlayerHitbox playerHitbox;
+    private InvincibilityTimer invincibilityTimer;
+
     private int score = 0;
     private int health = 100;
     private final int MAX_HEALTH = 100;
-
-    private long invicibleDuration;
+    private boolean invincible;
 
 
     public Player(Coordinate2D initialLocation, DinoCommute game, ScoreText scoreText, HealthText healthText) {
@@ -86,10 +89,19 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
     }
 
     private void takeDamage(int damage) {
-        if (invicibleDuration <= 0) {
+        if (!invincible) {
             setHealth(health - damage);
-            invicibleDuration = 3000;
+            setInvincible(true);
+            invincibilityTimer.reset();
+            invincibilityTimer.resume();
+        }
+    }
+    protected void setInvincible(boolean state) {
+        invincible = state;
+        if (state) {
             setOpacity(0.6);
+        } else {
+            setOpacity(1);
         }
     }
 
@@ -106,7 +118,6 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
     }
 
     private void setAnimation(Set<KeyCode> set) {
-        System.out.print("Player is on ground: " + isOnGround());
         if (set.contains(KeyCode.DOWN) && isOnGround()) {
             playerSprite.setAnimationRow(1);
             playerHitbox.setHitBoxLow();
@@ -141,6 +152,11 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
             setAnchorLocationY(getSceneHeight() - getHeight() - 100);
             setSpeed(0);
         }
+    }
 
+    @Override
+    public void setupTimers() {
+        this.invincibilityTimer = new InvincibilityTimer(1000, this);
+        addTimer(invincibilityTimer);
     }
 }
