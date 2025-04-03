@@ -29,26 +29,23 @@ public class EndScreen extends CompositeEntity {
 
     @Override
     protected void setupEntities() {
-        boolean isNewHighScore = CURRENT_SCORE >= HIGH_SCORE;
         
-        if (isNewHighScore) {
+        if (CURRENT_SCORE >= HIGH_SCORE) {
             Text newHighScoreText = new Text(
                 new Coordinate2D(SCENE_WIDTH / 2, (SCENE_HEIGHT / 2) - 150), 40, "New High Score!");
             newHighScoreText.setAnchorPoint(AnchorPoint.CENTER_CENTER);
             addEntity(newHighScoreText);
         }
-        
-        Text gameOverText = new Text(new Coordinate2D(SCENE_WIDTH / 2, (SCENE_HEIGHT / 2) - 70), 80, "Game Over");
-        gameOverText.setAnchorPoint(AnchorPoint.CENTER_CENTER);
-        addEntity(gameOverText);
-        
-        Text scoreText = new Text(new Coordinate2D(SCENE_WIDTH / 2, (SCENE_HEIGHT / 2) - 10),
-            30, 
-            "Score: " + CURRENT_SCORE
-        );
-        scoreText.setAnchorPoint(AnchorPoint.CENTER_CENTER);
-        addEntity(scoreText);
-        
+
+        ArrayList<Text> textEntities = new ArrayList<>();
+        textEntities.add(new Text(new Coordinate2D(SCENE_WIDTH / 2, (SCENE_HEIGHT / 2) - 70), 80, "Game Over"));
+        textEntities.add(new Text(new Coordinate2D(SCENE_WIDTH / 2, (SCENE_HEIGHT / 2) - 10), 30, "Score: " + CURRENT_SCORE));
+
+        for (Text text : textEntities) {
+            text.setAnchorPoint(AnchorPoint.CENTER_CENTER);
+            addEntity(text);
+        }
+
         ArrayList<Button> buttons = new ArrayList<>();
         buttons.add(new StartButton(new Coordinate2D(SCENE_WIDTH / 2, (SCENE_HEIGHT / 2) + 50), GAME, 30));
         buttons.add(new QuitButton(new Coordinate2D(SCENE_WIDTH / 2, (SCENE_HEIGHT / 2) + 120), GAME, 30));

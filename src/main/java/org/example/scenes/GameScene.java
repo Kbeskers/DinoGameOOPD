@@ -59,7 +59,7 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, T
         this.highScoreText = (HighScoreText) textEntities.get(1);
         this.scoreText = (ScoreText) textEntities.get(2);
 
-        this.player = new Player(new Coordinate2D(100, 500), GAME, scoreText, (HealthText) textEntities.get(0), highScoreText, this);
+        this.player = new Player(new Coordinate2D(100, 500), scoreText, (HealthText) textEntities.get(0), highScoreText, this);
         addEntity(player);
 
         addEntity(new ParallaxBackground("backgrounds/lucht_achtergrond.png", new Coordinate2D(0, 0), new Size(getWidth() * 1.2, getHeight()), this, 104, 1.1));

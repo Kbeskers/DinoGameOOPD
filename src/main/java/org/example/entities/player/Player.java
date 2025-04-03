@@ -24,8 +24,6 @@ import java.util.List;
 import java.util.Set;
 
 public class Player extends DynamicCompositeEntity implements KeyListener, Newtonian, UpdateExposer, TimerContainer {
-    private final DinoCommute GAME;
-    private final ScoreText SCORE_TEXT;
     private final HealthText HEALTH_TEXT;
     private PlayerSprite playerSprite;
     private PlayerHitbox playerHitbox;
@@ -34,15 +32,12 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
     private final ScoreManager SCORE_MANAGER;
     private final GameScene GAME_SCENE;
 
-    private int score = 0;
     private int health = 100;
     private final int MAX_HEALTH = 100;
     private boolean invincible;
 
-    public Player(Coordinate2D initialLocation, DinoCommute game, ScoreText scoreText, HealthText healthText, HighScoreText highScoreText, GameScene GameScene) {
+    public Player(Coordinate2D initialLocation, ScoreText scoreText, HealthText healthText, HighScoreText highScoreText, GameScene GameScene) {
         super(initialLocation);
-        this.GAME = game;
-        this.SCORE_TEXT = scoreText;
         this.HEALTH_TEXT = healthText;
         this.SCORE_MANAGER = new ScoreManager(scoreText, highScoreText);
         this.GAME_SCENE = GameScene;
