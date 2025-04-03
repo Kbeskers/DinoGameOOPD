@@ -62,7 +62,7 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
     @Override
     public void onPressedKeysChange(Set<KeyCode> set) {
         setAnimation(set);
-        if ((set.contains(KeyCode.UP) || set.contains(KeyCode.SPACE)) && isOnGround()) {
+        if ((set.contains(KeyCode.UP) || set.contains(KeyCode.SPACE) || set.contains(KeyCode.W)) && isOnGround()) {
             setMotion(15, 180d);
         }
     }
@@ -123,7 +123,7 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
     }
 
     private void setAnimation(Set<KeyCode> set) {
-        if (set.contains(KeyCode.DOWN) && isOnGround()) {
+        if ((set.contains(KeyCode.DOWN) || set.contains(KeyCode.S)) && isOnGround()) {
             playerSprite.setAnimationRow(1);
             playerHitbox.setHitBoxLow();
         } else {

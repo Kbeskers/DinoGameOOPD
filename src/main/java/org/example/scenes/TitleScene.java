@@ -36,11 +36,11 @@ public class TitleScene extends StaticScene {
         addEntity(dinoImage);
 
         ArrayList<Text> textEntities = new ArrayList<>();
-        textEntities.add(new HighScoreText(new Coordinate2D(getWidth() - offset, offset), textSize));
+        textEntities.add(new HighScoreText(new Coordinate2D(getWidth() - (offset * 12), offset), textSize));
         textEntities.add(new Text(new Coordinate2D(getWidth() / 2, (getHeight() / 2) - 70), 80, "Dino Commute!"));
         for (Text text : textEntities) {
             if (text instanceof HighScoreText) {
-                text.setAnchorPoint(AnchorPoint.TOP_RIGHT);
+                text.setAnchorPoint(AnchorPoint.TOP_LEFT);
             } else if (text instanceof Text) {
                 text.setAnchorPoint(AnchorPoint.CENTER_CENTER);
             }
