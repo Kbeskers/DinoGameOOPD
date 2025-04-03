@@ -29,18 +29,13 @@ public class EndScreen extends CompositeEntity {
 
     @Override
     protected void setupEntities() {
-        
-        if (CURRENT_SCORE >= HIGH_SCORE) {
-            Text newHighScoreText = new Text(
-                new Coordinate2D(SCENE_WIDTH / 2, (SCENE_HEIGHT / 2) - 150), 40, "New High Score!");
-            newHighScoreText.setAnchorPoint(AnchorPoint.CENTER_CENTER);
-            addEntity(newHighScoreText);
-        }
 
         ArrayList<Text> textEntities = new ArrayList<>();
+        if (CURRENT_SCORE >= HIGH_SCORE) {
+            textEntities.add(new Text(new Coordinate2D(SCENE_WIDTH / 2, (SCENE_HEIGHT / 2) - 150), 40, "New High Score!"));
+        }
         textEntities.add(new Text(new Coordinate2D(SCENE_WIDTH / 2, (SCENE_HEIGHT / 2) - 70), 80, "Game Over"));
         textEntities.add(new Text(new Coordinate2D(SCENE_WIDTH / 2, (SCENE_HEIGHT / 2) - 10), 30, "Score: " + CURRENT_SCORE));
-
         for (Text text : textEntities) {
             text.setAnchorPoint(AnchorPoint.CENTER_CENTER);
             addEntity(text);
