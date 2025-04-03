@@ -163,4 +163,12 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
             setSpeed(0);
         }
     }
+
+    public int getScore() {
+        return SCORE_MANAGER.getScore();
+    }
+
+    public int getHighScore() {
+        return SCORE_MANAGER.getHighScore();
+    }
 }
