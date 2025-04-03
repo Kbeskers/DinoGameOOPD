@@ -142,7 +142,6 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
 
     private boolean isDead() {
         if (health <= 0) {
-            health = 0;
             return true;
         }
         return false;

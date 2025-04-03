@@ -6,7 +6,7 @@ import com.github.hanyaeger.api.entities.impl.SpriteEntity;
 
 public class SwordSprite extends SpriteEntity {
     protected SwordSprite(Coordinate2D initialLocation) {
-        super("sprites/zwaard.png", initialLocation, new Size(170, 170));
+        super("sprites/zwaard.png", initialLocation, new Size(190, 190));
         setVisible(false);
     }
 }
