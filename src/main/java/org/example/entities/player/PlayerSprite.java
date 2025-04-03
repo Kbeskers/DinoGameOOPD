@@ -1,7 +1,6 @@
 package org.example.entities.player;
 
 import com.github.hanyaeger.api.Coordinate2D;
-import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 
 public class PlayerSprite extends DynamicSpriteEntity {

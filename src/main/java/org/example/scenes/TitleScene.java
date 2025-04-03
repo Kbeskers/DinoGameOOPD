@@ -2,8 +2,10 @@ package org.example.scenes;
 
 import com.github.hanyaeger.api.AnchorPoint;
 import com.github.hanyaeger.api.Coordinate2D;
+import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.scenes.StaticScene;
 import org.example.DinoCommute;
+import org.example.ui.TitlescreenImage;
 import org.example.ui.button.Button;
 import org.example.ui.button.QuitButton;
 import org.example.ui.button.StartButton;
@@ -28,6 +30,10 @@ public class TitleScene extends StaticScene {
     public void setupEntities() {
         int offset = (int) (getWidth() / 50);
         int textSize = 30;
+
+        TitlescreenImage dinoImage = new TitlescreenImage(new Coordinate2D(getWidth() / 2, (getHeight() / 2)),new Size(getWidth(), getHeight()));
+        dinoImage.setAnchorPoint(AnchorPoint.CENTER_CENTER);
+        addEntity(dinoImage);
 
         ArrayList<Text> textEntities = new ArrayList<>();
         textEntities.add(new HighScoreText(new Coordinate2D(getWidth() - offset, offset), textSize));
