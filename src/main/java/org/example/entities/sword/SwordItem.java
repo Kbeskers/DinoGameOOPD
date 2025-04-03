@@ -31,7 +31,7 @@ public class SwordItem extends DynamicCompositeEntity implements TimerContainer 
 
     public void setSwordActive(boolean value){
         if (value){
-            StartSwordTimer(DURATION);
+            swordTimer.StartTimer(DURATION);
         }
         swordSprite.setVisible(value);
         swordHitbox.setActive(value);

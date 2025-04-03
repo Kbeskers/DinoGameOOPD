@@ -42,6 +42,12 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
     }
 
     @Override
+    public void setupTimers() {
+        this.invincibilityTimer = new InvincibilityTimer(1000, this);
+        addTimer(invincibilityTimer);
+    }
+
+    @Override
     protected void setupEntities() {
         this.playerSprite = new PlayerSprite(new Coordinate2D(0, 0));
         addEntity(playerSprite);
@@ -54,7 +60,7 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
     @Override
     public void onPressedKeysChange(Set<KeyCode> set) {
         setAnimation(set);
-        if (set.contains(KeyCode.UP) && isOnGround()) {
+        if ((set.contains(KeyCode.UP) || set.contains(KeyCode.SPACE)) && isOnGround()) {
             setMotion(15, 180d);
         }
     }
@@ -73,6 +79,14 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
         }
     }
 
+    protected void takeDamage(int damage) {
+        if (!invincible) {
+            setHealth(health - damage);
+            setInvincible(true);
+            invincibilityTimer.StartTimer(2000);
+        }
+    }
+
     private void pickupCoin() {
         score += 100;
         SCORE_TEXT.setScoreText(score);
@@ -86,14 +100,6 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
         swordItem.setSwordActive(true);
     }
 
-    private void takeDamage(int damage) {
-        if (!invincible) {
-            setHealth(health - damage);
-            setInvincible(true);
-            StartInvincibiltyTimer(2000);
-        }
-    }
-
     protected void setInvincible(boolean state) {
         invincible = state;
         if (state) {
@@ -101,12 +107,6 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
         } else {
             setOpacity(1);
         }
-    }
-
-    protected void StartInvincibiltyTimer(int duration){
-        invincibilityTimer.setIntervalInMs(duration);
-        invincibilityTimer.reset();
-        invincibilityTimer.resume();
     }
 
     private void setHealth(int newHealth) {
@@ -156,11 +156,5 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
             setAnchorLocationY(getSceneHeight() - getHeight() - 100);
             setSpeed(0);
         }
-    }
-
-    @Override
-    public void setupTimers() {
-        this.invincibilityTimer = new InvincibilityTimer(1000, this);
-        addTimer(invincibilityTimer);
     }
 }
