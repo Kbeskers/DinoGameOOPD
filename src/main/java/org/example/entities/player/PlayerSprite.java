@@ -8,7 +8,7 @@ public class PlayerSprite extends DynamicSpriteEntity {
     private final int ANIMATION_DURATION = 200;
 
     public PlayerSprite(Coordinate2D initialLocation) {
-        super("sprites/Dinoanimaties.png", initialLocation, 2, 8);
+        super("sprites/dinoAnimation.png", initialLocation, 2, 8);
         setAutoCycle(ANIMATION_DURATION);
         setAutoCycleRow(0);
     }

@@ -21,6 +21,8 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, T
     private final HostileEntitySpawner HOSTILE_SPAWNER = new HostileEntitySpawner(this);
     private final PowerUpSpawner POWERUP_SPAWNER = new PowerUpSpawner(this);
     private Player player;
+    private ScoreText scoreText;
+    private HighScoreText highScoreText;
 
     public GameScene(DinoCommute dinoCommute) {
         GAME = dinoCommute;
@@ -54,7 +56,10 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, T
             addEntity(text);
         }
 
-        this.player = new Player(new Coordinate2D(100, 500), GAME, (ScoreText) textEntities.get(2), (HealthText) textEntities.get(0));
+        this.highScoreText = (HighScoreText) textEntities.get(1);
+        this.scoreText = (ScoreText) textEntities.get(2);
+
+        this.player = new Player(new Coordinate2D(100, 500), GAME, scoreText, (HealthText) textEntities.get(0), highScoreText, this);
         addEntity(player);
 
         addEntity(new ParallaxBackground("backgrounds/lucht_achtergrond.png", new Coordinate2D(0, 0), new Size(getWidth() * 1.2, getHeight()), this, 104, 1.1));
@@ -75,5 +80,12 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, T
     public void setupTimers() {
         var speedManager = new SpeedManager(player, HOSTILE_SPAWNER, POWERUP_SPAWNER);
         addTimer(speedManager);
+    }
+
+    public void showEndScene() {
+        pause();
+        int currentScore = player.getScore();
+        int currentHighScore = player.getHighScore();
+        addEntity(new EndScreen(new Coordinate2D(0, 0), GAME, getWidth(), getHeight(), currentScore, currentHighScore));
     }
 }
