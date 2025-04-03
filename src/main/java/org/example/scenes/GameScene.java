@@ -45,14 +45,10 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, T
 
         ArrayList<Text> textEntities = new ArrayList<>();
         textEntities.add(new HealthText(new Coordinate2D(offset, offset), textSize));
-        textEntities.add(new HighScoreText(new Coordinate2D(getWidth() - offset, offset), textSize));
-        textEntities.add(new ScoreText(new Coordinate2D(getWidth() - offset, (offset * 2) + textSize), textSize));
+        textEntities.add(new HighScoreText(new Coordinate2D(getWidth() - (offset * 12), offset), textSize));
+        textEntities.add(new ScoreText(new Coordinate2D(getWidth() - (offset * 12), (offset * 2) + textSize), textSize));
         for (Text text : textEntities) {
-            if (text instanceof HealthText) {
-                text.setAnchorPoint(AnchorPoint.TOP_LEFT);
-            } else if (text instanceof HighScoreText || text instanceof ScoreText) {
-                text.setAnchorPoint(AnchorPoint.TOP_RIGHT);
-            }
+            text.setAnchorPoint(AnchorPoint.TOP_LEFT);
             addEntity(text);
         }
 
