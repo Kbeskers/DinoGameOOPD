@@ -34,6 +34,7 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
     private final ScoreManager SCORE_MANAGER;
     private final GameScene GAME_SCENE;
 
+    private int score = 0;
     private int health = 100;
     private final int MAX_HEALTH = 100;
     private boolean invincible;
@@ -48,19 +49,25 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
     }
 
     @Override
+    public void setupTimers() {
+        this.invincibilityTimer = new InvincibilityTimer(1000, this);
+        addTimer(invincibilityTimer);
+    }
+
+    @Override
     protected void setupEntities() {
         this.playerSprite = new PlayerSprite(new Coordinate2D(0, 0));
         addEntity(playerSprite);
         this.playerHitbox = new PlayerHitbox(new Coordinate2D(0, 0), this);
         addEntity(playerHitbox);
-        this.swordItem = new SwordItem(new Coordinate2D(0, 0),5000);
+        this.swordItem = new SwordItem(new Coordinate2D(0, 0), 5000);
         addEntity(swordItem);
     }
 
     @Override
     public void onPressedKeysChange(Set<KeyCode> set) {
         setAnimation(set);
-        if (set.contains(KeyCode.UP) && isOnGround()) {
+        if ((set.contains(KeyCode.UP) || set.contains(KeyCode.SPACE)) && isOnGround()) {
             setMotion(15, 180d);
         }
     }
@@ -79,6 +86,14 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
         }
     }
 
+    protected void takeDamage(int damage) {
+        if (!invincible) {
+            setHealth(health - damage);
+            setInvincible(true);
+            invincibilityTimer.StartTimer(2000);
+        }
+    }
+
     private void pickupCoin() {
         SCORE_MANAGER.addPoints(100);
     }
@@ -91,14 +106,6 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
         swordItem.setSwordActive(true);
     }
 
-    private void takeDamage(int damage) {
-        if (!invincible) {
-            setHealth(health - damage);
-            setInvincible(true);
-            StartInvincibiltyTimer(2000);
-        }
-    }
-
     protected void setInvincible(boolean state) {
         invincible = state;
         if (state) {
@@ -106,12 +113,6 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
         } else {
             setOpacity(1);
         }
-    }
-
-    protected void StartInvincibiltyTimer(int duration){
-        invincibilityTimer.setIntervalInMs(duration);
-        invincibilityTimer.reset();
-        invincibilityTimer.resume();
     }
 
     private void setHealth(int newHealth) {
@@ -140,6 +141,7 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
         playerSprite.setAnimationSpeed(speedMultiplier);
     }
 
+    //CHECKS
     private boolean isDead() {
         if (health <= 0) {
             return true;
@@ -154,24 +156,11 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
         return false;
     }
 
+    //Called every GWU
     public final void explicitUpdate(long timestamp) {
         if (getLocationInScene().getY() > getSceneHeight() - getHeight() - 100) {
             setAnchorLocationY(getSceneHeight() - getHeight() - 100);
             setSpeed(0);
         }
-    }
-
-    @Override
-    public void setupTimers() {
-        this.invincibilityTimer = new InvincibilityTimer(1000, this);
-        addTimer(invincibilityTimer);
-    }
-    
-    public int getScore() {
-        return SCORE_MANAGER.getScore();
-    }
-    
-    public int getHighScore() {
-        return SCORE_MANAGER.getHighScore();
     }
 }

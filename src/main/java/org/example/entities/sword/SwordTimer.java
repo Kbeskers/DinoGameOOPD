@@ -1,8 +1,8 @@
 package org.example.entities.sword;
 
-import com.github.hanyaeger.api.Timer;
+import org.example.entities.GeneralTimer;
 
-public class SwordTimer extends Timer {
+public class SwordTimer extends GeneralTimer {
     private final SwordItem SWORD;
 
     public SwordTimer(long intervalInMs, SwordItem sword) {
