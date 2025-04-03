@@ -1,7 +1,6 @@
 package org.example.scenes;
 
 import com.github.hanyaeger.api.*;
-import org.example.entities.Entityspawner;
 import com.github.hanyaeger.api.entities.YaegerEntity;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import org.example.DinoCommute;
@@ -67,7 +66,6 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, T
 
     @Override
     public void setupEntitySpawners() {
-        addEntitySpawner(new Entityspawner());
         addEntitySpawner(HOSTILE_SPAWNER);
         addEntitySpawner(POWERUP_SPAWNER);
     }
