@@ -4,7 +4,6 @@ import com.github.hanyaeger.api.entities.Direction;
 import com.github.hanyaeger.api.entities.EntitySpawner;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.scenes.DynamicScene;
-import org.example.entities.hostileEntity.HostileEntity;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,8 @@
 package org.example.entities.sword;
 
-import org.example.entities.GeneralTimer;
+import org.example.entities.GeneralOneShotTimer;
 
-public class SwordTimer extends GeneralTimer {
+public class SwordTimer extends GeneralOneShotTimer {
     private final SwordItem SWORD;
 
     public SwordTimer(long intervalInMs, SwordItem sword) {
@@ -10,9 +10,7 @@ public class SwordTimer extends GeneralTimer {
         this.SWORD = sword;
     }
 
-    @Override
-    public void onAnimationUpdate(long l) {
+    public void timerTriggered() {
         SWORD.setSwordActive(false);
-        pause();
     }
 }

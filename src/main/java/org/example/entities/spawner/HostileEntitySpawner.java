@@ -1,8 +1,6 @@
 package org.example.entities.spawner;
 
 import com.github.hanyaeger.api.Coordinate2D;
-import com.github.hanyaeger.api.entities.Direction;
-import com.github.hanyaeger.api.entities.EntitySpawner;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import org.example.entities.hostileEntity.HostileEntity;
 import org.example.entities.hostileEntity.enemy.Dino;
@@ -10,10 +8,6 @@ import org.example.entities.hostileEntity.enemy.Pterodactyl;
 import org.example.entities.hostileEntity.obstacle.Bike;
 import org.example.entities.hostileEntity.obstacle.Car;
 import org.example.entities.hostileEntity.obstacle.Trashcan;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class HostileEntitySpawner extends GeneralSpawner {
     private final double PTERODACTYL_CHANCE = 0.25;

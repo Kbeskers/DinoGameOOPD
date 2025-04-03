@@ -1,8 +1,8 @@
 package org.example.entities.player;
 
-import org.example.entities.GeneralTimer;
+import org.example.entities.GeneralOneShotTimer;
 
-public class InvincibilityTimer extends GeneralTimer {
+public class InvincibilityTimer extends GeneralOneShotTimer {
     private final Player PLAYER;
 
     public InvincibilityTimer(long intervalInMs, Player player) {
@@ -10,9 +10,7 @@ public class InvincibilityTimer extends GeneralTimer {
         this.PLAYER = player;
     }
 
-    @Override
-    public void onAnimationUpdate(long l) {
+    public void timerTriggered() {
         PLAYER.setInvincible(false);
-        pause();
     }
 }

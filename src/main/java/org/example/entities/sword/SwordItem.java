@@ -36,10 +36,4 @@ public class SwordItem extends DynamicCompositeEntity implements TimerContainer 
         swordSprite.setVisible(value);
         swordHitbox.setActive(value);
     }
-
-    protected void StartSwordTimer(long duration){
-        swordTimer.setIntervalInMs(duration);
-        swordTimer.reset();
-        swordTimer.resume();
-    }
 }

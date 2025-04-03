@@ -1,17 +1,11 @@
 package org.example.entities.spawner;
 
 import com.github.hanyaeger.api.Coordinate2D;
-import com.github.hanyaeger.api.entities.Direction;
-import com.github.hanyaeger.api.entities.EntitySpawner;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import org.example.entities.powerup.Coin;
 import org.example.entities.powerup.Heart;
 import org.example.entities.powerup.Powerup;
 import org.example.entities.powerup.Sword;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class PowerUpSpawner extends GeneralSpawner {
     private final double COIN_CHANCE = 0.8;
