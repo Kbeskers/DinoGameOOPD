@@ -21,7 +21,7 @@ public class SpeedManager extends Timer {
         this.POWERUP_SPAWNER = powerUpSpawner;
         this.SCORE_MANAGER = scoreManager;
 
-        speedMultiplier = 1;
+        speedMultiplier = 2;
     }
 
     @Override

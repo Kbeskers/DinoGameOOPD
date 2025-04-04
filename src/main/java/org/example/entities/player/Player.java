@@ -89,7 +89,7 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
     }
 
     private void pickupCoin() {
-        SCORE_MANAGER.addPoints(100);
+        SCORE_MANAGER.addPoints(10);
     }
 
     private void pickupHeart() {

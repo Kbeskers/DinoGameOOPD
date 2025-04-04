@@ -63,8 +63,8 @@ public class ParallaxBackground extends DynamicSpriteEntity implements SceneBord
         }
 
         if (border.equals(SceneBorder.LEFT) && shouldRemoveBackground()) {
-            parallaxlayers.remove(this);
             this.remove();
+            parallaxlayers.remove(this);
         }
     }
 
