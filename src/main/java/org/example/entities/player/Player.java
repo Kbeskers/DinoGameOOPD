@@ -16,8 +16,6 @@ import org.example.entities.powerup.Heart;
 import org.example.entities.powerup.Sword;
 import org.example.scenes.GameScene;
 import org.example.ui.text.HealthText;
-import org.example.ui.text.ScoreText;
-import org.example.ui.text.HighScoreText;
 
 import java.util.List;
 import java.util.Set;
