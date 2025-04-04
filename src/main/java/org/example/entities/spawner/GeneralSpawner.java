@@ -14,12 +14,14 @@ public abstract class GeneralSpawner extends EntitySpawner {
     protected final Random random = new Random();
     protected final double BASE_SPEED = 2;
     protected double speedMultiplier = 1;
+    protected long baseInterval;
 
     protected final List<DynamicSpriteEntity> spawnedEntities = new ArrayList<>();
 
     protected GeneralSpawner(long intervalInMs, DynamicScene gameScene) {
         super(intervalInMs);
         this.GAME_SCENE = gameScene;
+        this.baseInterval = intervalInMs;
     }
 
     @Override
@@ -38,5 +40,6 @@ public abstract class GeneralSpawner extends EntitySpawner {
         for (DynamicSpriteEntity entity : spawnedEntities) {
             entity.setMotion(getCurrentSpeed(), Direction.LEFT);
         }
+        setIntervalInMs((long) (baseInterval / (speedMultiplier/2)));
     }
 }

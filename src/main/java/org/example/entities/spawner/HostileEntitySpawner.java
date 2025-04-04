@@ -27,7 +27,7 @@ public class HostileEntitySpawner extends GeneralSpawner {
 
         HostileEntity entity;
         if (rand < PTERODACTYL_CHANCE) {
-            entity = new Pterodactyl(new Coordinate2D(GAME_SCENE.getWidth() - 1, randomDouble(200, GAME_SCENE.getHeight())), getCurrentSpeed());
+            entity = new Pterodactyl(new Coordinate2D(GAME_SCENE.getWidth() - 1, randomDouble(500, GAME_SCENE.getHeight())), getCurrentSpeed());
         } else if (rand < PTERODACTYL_CHANCE + BIKE_CHANCE) {
             entity = new Bike(new Coordinate2D(GAME_SCENE.getWidth() - 1, GAME_SCENE.getHeight() - groundOffset), getCurrentSpeed());
         } else if (rand < PTERODACTYL_CHANCE + BIKE_CHANCE + TRASHCAN_CHANCE) {

@@ -10,14 +10,16 @@ public class SpeedManager extends Timer {
     private final Player PLAYER;
     private final HostileEntitySpawner HOSTILE_SPAWNER;
     private final PowerUpSpawner POWERUP_SPAWNER;
+    private final ScoreManager SCORE_MANAGER;
 
     private double speedMultiplier;
 
-    public SpeedManager(Player player, HostileEntitySpawner HostileEntitySpawner, PowerUpSpawner powerUpSpawner) {
+    public SpeedManager(Player player, HostileEntitySpawner HostileEntitySpawner, PowerUpSpawner powerUpSpawner, ScoreManager scoreManager) {
         super(1000);
         this.PLAYER = player;
         this.HOSTILE_SPAWNER = HostileEntitySpawner;
         this.POWERUP_SPAWNER = powerUpSpawner;
+        this.SCORE_MANAGER = scoreManager;
 
         speedMultiplier = 1;
     }
@@ -29,5 +31,9 @@ public class SpeedManager extends Timer {
         HOSTILE_SPAWNER.setSpeedMultiplier(speedMultiplier);
         POWERUP_SPAWNER.setSpeedMultiplier(speedMultiplier);
         ParallaxBackground.setAllBackgroundSpeeds(speedMultiplier);
+
+        double pointsToAddDouble = 0.02 * speedMultiplier * speedMultiplier + 1;
+        int pointsToAdd = (int) pointsToAddDouble;
+        SCORE_MANAGER.addPoints(pointsToAdd);
     }
 }

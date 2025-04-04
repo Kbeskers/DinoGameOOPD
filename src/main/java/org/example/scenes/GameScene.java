@@ -3,9 +3,11 @@ package org.example.scenes;
 import com.github.hanyaeger.api.*;
 import com.github.hanyaeger.api.entities.YaegerEntity;
 import com.github.hanyaeger.api.scenes.DynamicScene;
+import javafx.scene.control.SplitPane;
 import org.example.DinoCommute;
 import org.example.entities.spawner.HostileEntitySpawner;
 import org.example.entities.player.Player;
+import org.example.entities.ScoreManager;
 import org.example.entities.SpeedManager;
 import org.example.entities.spawner.PowerUpSpawner;
 import org.example.ui.text.HealthText;
@@ -22,6 +24,7 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, T
     private Player player;
     private ScoreText scoreText;
     private HighScoreText highScoreText;
+    private ScoreManager scoreManager;
 
     public GameScene(DinoCommute dinoCommute) {
         GAME = dinoCommute;
@@ -53,8 +56,10 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, T
 
         this.highScoreText = (HighScoreText) textEntities.get(1);
         this.scoreText = (ScoreText) textEntities.get(2);
+        
+        this.scoreManager = new ScoreManager(scoreText, highScoreText);
 
-        this.player = new Player(new Coordinate2D(100, 500), scoreText, (HealthText) textEntities.get(0), highScoreText, this);
+        this.player = new Player(new Coordinate2D(100, 500), (HealthText) textEntities.get(0), scoreManager, this);
         addEntity(player);
 
         addEntity(new ParallaxBackground("backgrounds/paralaxLayerSky.png", new Coordinate2D(0, 0), new Size(getWidth() * 1.2, getHeight()), this, 104, 1.1));
@@ -72,14 +77,18 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, T
 
     @Override
     public void setupTimers() {
-        var speedManager = new SpeedManager(player, HOSTILE_SPAWNER, POWERUP_SPAWNER);
+        var speedManager = new SpeedManager(player, HOSTILE_SPAWNER, POWERUP_SPAWNER, scoreManager);
         addTimer(speedManager);
     }
 
     public void showEndScene() {
         pause();
-        int currentScore = player.getScore();
-        int currentHighScore = player.getHighScore();
+        int currentScore = scoreManager.getScore();
+        int currentHighScore = scoreManager.getHighScore();
         addEntity(new EndScreen(new Coordinate2D(0, 0), GAME, getWidth(), getHeight(), currentScore, currentHighScore));
+    }
+    
+    public ScoreManager getScoreManager() {
+        return scoreManager;
     }
 }

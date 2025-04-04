@@ -8,9 +8,9 @@ import org.example.entities.powerup.Powerup;
 import org.example.entities.powerup.Sword;
 
 public class PowerUpSpawner extends GeneralSpawner {
-    private final double COIN_CHANCE = 0.8;
+    private final double COIN_CHANCE = 0.55;
     private final double HEART_CHANCE = 0.1;
-    private final double SWORD_CHANCE = 0.1;
+    private final double SWORD_CHANCE = 0.05;
 
     public PowerUpSpawner(DynamicScene gameScene) {
         super(1000, gameScene);

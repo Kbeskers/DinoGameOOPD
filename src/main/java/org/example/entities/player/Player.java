@@ -35,11 +35,11 @@ public class Player extends DynamicCompositeEntity implements KeyListener, Newto
     private final int MAX_HEALTH = 100;
     private boolean invincible;
 
-    public Player(Coordinate2D initialLocation, ScoreText scoreText, HealthText healthText, HighScoreText highScoreText, GameScene GameScene) {
+    public Player(Coordinate2D initialLocation, HealthText healthText, ScoreManager scoreManager, GameScene gameScene) {
         super(initialLocation);
         this.HEALTH_TEXT = healthText;
-        this.SCORE_MANAGER = new ScoreManager(scoreText, highScoreText);
-        this.GAME_SCENE = GameScene;
+        this.SCORE_MANAGER = scoreManager;
+        this.GAME_SCENE = gameScene;
     }
 
     @Override
