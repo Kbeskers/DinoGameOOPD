@@ -11,7 +11,6 @@ import org.example.entities.player.PlayerHitbox;
 import java.util.List;
 
 public abstract class Powerup extends DynamicSpriteEntity implements Collider, Collided {
-
     protected Powerup(String resource, Coordinate2D initialLocation, Size size, double speed) {
         super(resource, initialLocation, size);
         setMotion(speed, 270d);

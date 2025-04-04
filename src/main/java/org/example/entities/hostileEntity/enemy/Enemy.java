@@ -3,7 +3,7 @@ package org.example.entities.hostileEntity.enemy;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
-import org.example.entities.sword.SwordHitbox;
+import org.example.entities.player.sword.SwordHitbox;
 import org.example.entities.hostileEntity.HostileEntity;
 
 import java.util.List;

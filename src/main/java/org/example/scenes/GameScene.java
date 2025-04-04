@@ -57,11 +57,11 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, T
         this.player = new Player(new Coordinate2D(100, 500), scoreText, (HealthText) textEntities.get(0), highScoreText, this);
         addEntity(player);
 
-        addEntity(new ParallaxBackground("backgrounds/lucht_achtergrond.png", new Coordinate2D(0, 0), new Size(getWidth() * 1.2, getHeight()), this, 104, 1.1));
-        addEntity(new ParallaxBackground("backgrounds/gebouwen_achter_achtergrond.png", new Coordinate2D(0, 0), new Size(getWidth() * 1.2, getHeight()), this, 103, 1.3));
-        addEntity(new ParallaxBackground("backgrounds/gebouwen_achtergrond.png", new Coordinate2D(0, 0), new Size(getWidth() * 1.2, getHeight()), this, 102, 1.5));
-        addEntity(new ParallaxBackground("backgrounds/gebouwen_voorgrond.png", new Coordinate2D(0, 0), new Size(getWidth() * 1.2, getHeight()), this, 101, 1.7));
-        addEntity(new ParallaxBackground("backgrounds/straat_voorgrond.png", new Coordinate2D(0, 0), new Size(getWidth() * 1.2, getHeight()), this, 100, 2));
+        addEntity(new ParallaxBackground("backgrounds/paralaxLayerSky.png", new Coordinate2D(0, 0), new Size(getWidth() * 1.2, getHeight()), this, 104, 1.1));
+        addEntity(new ParallaxBackground("backgrounds/paralaxLayerBuildingsFar.png", new Coordinate2D(0, 0), new Size(getWidth() * 1.2, getHeight()), this, 103, 1.3));
+        addEntity(new ParallaxBackground("backgrounds/paralaxLayerBuildings.png", new Coordinate2D(0, 0), new Size(getWidth() * 1.2, getHeight()), this, 102, 1.5));
+        addEntity(new ParallaxBackground("backgrounds/paralaxLayerBuildingsClose.png", new Coordinate2D(0, 0), new Size(getWidth() * 1.2, getHeight()), this, 101, 1.7));
+        addEntity(new ParallaxBackground("backgrounds/paralaxLayerStreet.png", new Coordinate2D(0, 0), new Size(getWidth() * 1.2, getHeight()), this, 100, 2));
     }
 
     @Override

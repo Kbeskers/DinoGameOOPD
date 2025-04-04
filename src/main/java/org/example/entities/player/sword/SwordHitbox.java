@@ -1,4 +1,4 @@
-package org.example.entities.sword;
+package org.example.entities.player.sword;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.entities.Collider;
@@ -12,30 +12,16 @@ public class SwordHitbox extends RectangleEntity implements Collider {
     public SwordHitbox(Coordinate2D initialLocation) {
         super(initialLocation);
         setFill(Color.TRANSPARENT);
-        disableHitbox();
+        setActive(false);
     }
 
     protected void setActive(boolean value) {
         if (value) {
-            setHitBoxHigh();
+            setWidth(WIDTH);
+            setHeight(HEIGHT);
         } else {
-            disableHitbox();
+            setWidth(0);
+            setHeight(0);
         }
-    }
-
-    protected void setHitBoxLow() {
-        setAnchorLocationY(HEIGHT / 2);
-        setWidth(WIDTH);
-        setHeight(HEIGHT / 2);
-    }
-
-    protected void setHitBoxHigh() {
-        setAnchorLocationY(0);
-        setWidth(WIDTH);
-        setHeight(HEIGHT);
-    }
-    private void disableHitbox() {
-        setWidth(0);
-        setHeight(0);
     }
 }

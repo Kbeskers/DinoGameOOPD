@@ -1,4 +1,4 @@
-package org.example.entities.sword;
+package org.example.entities.player.sword;
 
 import org.example.entities.GeneralOneShotTimer;
 

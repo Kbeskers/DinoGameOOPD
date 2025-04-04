@@ -1,4 +1,4 @@
-package org.example.entities.sword;
+package org.example.entities.player.sword;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.TimerContainer;
